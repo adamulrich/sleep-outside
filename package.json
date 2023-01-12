@@ -25,6 +25,11 @@
       "@babel/preset-env"
     ]
   },
+  "files": [
+      "json/tents.json"
+    ],
+
+
   "browserslist": [
     "last 3 and_chr versions",
     "last 3 chrome versions",
@@ -32,4 +37,5 @@
     "last 3 ios_saf versions",
     "last 3 safari versions"
   ]
+
 }

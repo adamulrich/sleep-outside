@@ -24,11 +24,10 @@ export default defineConfig({
           __dirname,
           'src/product_pages/northface-talus-4.html'
         ),
-        json1: resolve(
-          __dirname,
-          'src/json/tents.json'
-        )
       },
+    output: {
+      assetFileNames: 'json/tents.json'
+        }
     },
   },
 });
