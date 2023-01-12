@@ -6,9 +6,11 @@ const dataSource = new ProductData("tents");
 function addProductToCart(product) {
   let currentCart = getLocalStorage("so-cart");
   if (currentCart != null) {
+
     currentCart.push(product);
   } else {
     currentCart = [product];
+
   }
   setLocalStorage("so-cart", currentCart);
 }
