@@ -110,6 +110,17 @@ button {
   fill: gray;
 }
 
+.cart sub span{
+  position: fixed;
+  margin-left: -15px;
+  margin-top: -5px;
+  color: var(--dark-grey);
+  background-color: #f0a768cb;
+  font-size: 15px;
+  padding: 1px 5px;
+  border-radius: 200px;
+}
+
 /* End cart icon styles */
 
 .mission {
