@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../css/style.css" />
 
     <script src="../js/product.js" type="module"></script>
+    <script src="../js/main.js" type="module"></script>
   </head>
 
   <body>
@@ -54,6 +55,7 @@
             <!-- <text x="0" y="115" fill="#000000" font-size="5px" font-weight="bold" font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif">Created by Natalia Woodroffe</text>
             <text x="0" y="120" fill="#000000" font-size="5px" font-weight="bold" font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif">from the Noun Project</text> -->
           </svg>
+          <sub><span id="superscriptnum"></span></sub>
         </a>
       </div>
     </header>
@@ -81,7 +83,7 @@
         </p>
 
         <div class="product-detail__add">
-          <button id="addToCart" data-id="344YJ">Add to Cart</button>
+          <button id="addToCart" data-id="344YJ" onclick="window.location.reload()">Add to Cart</button>
         </div>
       </section>
     </main>
