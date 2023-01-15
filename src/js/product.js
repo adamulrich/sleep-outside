@@ -16,10 +16,20 @@ function addProductToCart(product) {
   }
   setLocalStorage('so-cart', currentCart);
 }
+
+function animateCart(){
+  let cart = document.querySelector('.cart');
+  cart.classList.add('pulse');
+  cart.addEventListener('animationend', () => {
+    cart.classList.remove('pulse');
+  }) 
+}
+
 // add to cart button event handler
 async function addToCartHandler(e) {
   const product = await dataSource.findProductById(e.target.dataset.id);
   addProductToCart(product);
+  animateCart();
 }
 
 // add listener to Add to Cart button
