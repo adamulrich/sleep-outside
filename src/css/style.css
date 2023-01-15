@@ -102,13 +102,32 @@ button {
   position: relative;
   text-align: center;
 }
-
+.pulse svg{
+  animation: pulse 0.25s ease-in-out;
+}
 .cart svg {
   width: 25px;
 }
 .cart:hover svg {
   fill: gray;
 }
+
+@keyframes pulse{
+  0%{
+    opacity: 1;
+    transform: scale(1)
+  }
+  50%{
+    opacity: .5;
+    transform: scale(1.25)
+  }
+  100%{
+    opacity: 1;
+    transform: scale(1)
+  }
+
+}
+
 
 /* End cart icon styles */
 
