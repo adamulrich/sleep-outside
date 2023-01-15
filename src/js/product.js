@@ -8,8 +8,10 @@ function addProductToCart(product) {
   if (currentCart != null) {
 
     currentCart.push(product);
+    location.reload();
   } else {
     currentCart = [product];
+    location.reload();
 
   }
   setLocalStorage('so-cart', currentCart);
