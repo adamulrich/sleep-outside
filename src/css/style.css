@@ -110,7 +110,7 @@ button {
   fill: gray;
 }
 
-.cart sub span{
+.cart sub span {
   position: relative;
   float: right;
   left: -16px;

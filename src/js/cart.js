@@ -6,7 +6,7 @@ function renderCartContents() {
   if (cartItems != null) {
     htmlItems = cartItems.map((item) => cartItemTemplate(item));
     document.querySelector('.product-list').innerHTML = htmlItems.join('');
-  } 
+  }
 }
 
 function cartItemTemplate(item) {
@@ -37,12 +37,12 @@ function displayTotal() {
   } else {
     totalSection.classList.remove('show');
   }
-  let total = 0, i = 0;
+  let total = 0,
+    i = 0;
   for (i = 0; i < cartItems.length; i++) {
     total += parseFloat(cartItems[i].FinalPrice);
   }
-  totalSum.innerText = total;
-
+  totalSum.innerText = Math.round(total * 100) / 100;
 }
 
 displayTotal();
