@@ -28,4 +28,22 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
+function displayTotal() {
+  const cartItems = getLocalStorage('so-cart');
+  const totalSection = document.querySelector('.total');
+  const totalSum = document.getElementById('total-sum');
+  if (cartItems != null) {
+    totalSection.classList.add('show');
+  } else {
+    totalSection.classList.remove('show');
+  }
+  let total = 0, i = 0;
+  for (i = 0; i < cartItems.length; i++) {
+    total += parseFloat(cartItems[i].FinalPrice);
+  }
+  totalSum.innerText = total;
+
+}
+
+displayTotal();
 renderCartContents();
