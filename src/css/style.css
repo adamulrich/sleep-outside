@@ -200,6 +200,16 @@ button {
   width: 100%;
 }
 
+#product-suggested-retail-price {
+  text-decoration: line-through red;
+  color: red;
+}
+
+#product-final-price {
+  color: green;
+  font-size: 2rem;
+}
+
 /* Start cart list card styles */
 .cart-card {
   display: grid;
