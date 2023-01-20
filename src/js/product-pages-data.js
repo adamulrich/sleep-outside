@@ -16,5 +16,6 @@ async function buildDetailsPage() {
     document.getElementById('product-brand-name').innerText = product.Brand.Name;
     document.title = 'Sleep Outside | ' + product.Name;
     document.getElementById('product-final-price').innerText = `$${product.FinalPrice}`;
+    document.getElementById('product-discount-percent').innerText = `${((product.SuggestedRetailPrice - product.FinalPrice) / product.SuggestedRetailPrice * 100).toFixed(0)}% off`;
 }
 buildDetailsPage()
