@@ -8,7 +8,7 @@ async function buildDetailsPage() {
     const product = await dataSource.findProductById(productId);
     document.getElementById('addToCart').setAttribute('data-id',productId);
     document.getElementById('product-descriptionhtmlsimple').innerHTML = product.DescriptionHtmlSimple;
-    document.getElementById('product-color-name').innerText = product.Colors.ColorName;
+    document.getElementById('product-color-name').innerText = product.Colors[0].ColorName;
     document.getElementById('product-listprice').innerText = product.ListPrice;
     document.getElementById('product-image').src = product.Image;
     document.getElementById('product-image').alt = product.Name;
