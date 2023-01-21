@@ -1,9 +1,9 @@
 // Superscript number on cart
-let ssn = document.getElementById('superscriptnum');
+const ssn = document.getElementById('superscriptnum');
 if (ssn.textContent === '') {
   ssn.setAttribute('class', 'is-empty');
 }
-function displaySuperscriptNumber() {
+export function displaySuperscriptNumber() {
   let items = JSON.parse(localStorage.getItem('so-cart'));
   if (items != null) {
     ssn.classList.remove('is-empty');

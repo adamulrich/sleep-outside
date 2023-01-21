@@ -1,5 +1,6 @@
 import { getLocalStorage, setLocalStorage } from './utils.mjs';
 import ProductData from './ProductData.mjs';
+import { displaySuperscriptNumber } from './main.js';
 
 const dataSource = new ProductData('tents');
 
@@ -7,12 +8,11 @@ function addProductToCart(product) {
   let currentCart = getLocalStorage('so-cart');
   if (currentCart != null) {
     currentCart.push(product);
-    location.reload();
   } else {
     currentCart = [product];
-    location.reload();
   }
   setLocalStorage('so-cart', currentCart);
+  displaySuperscriptNumber();
 }
 
 function animateCart(){
