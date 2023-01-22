@@ -7,8 +7,16 @@ const dataSource = new ProductData('tents');
 function addProductToCart(product) {
   let currentCart = getLocalStorage('so-cart');
   if (currentCart != null) {
+    for(let i = 0; i < currentCart.length; i++){
+      if (JSON.stringify(currentCart[i]) === JSON.stringify(product)){
+        product.Quantity +=1;
+        product.FinalPrice *= product.Quantity
+        currentCart.splice(i, 1);
+      }
+    }
     currentCart.push(product);
-  } else {
+  } 
+  else{
     currentCart = [product];
   }
   setLocalStorage('so-cart', currentCart);
@@ -26,6 +34,7 @@ function animateCart(){
 // add to cart button event handler
 async function addToCartHandler(e) {
   const product = await dataSource.findProductById(e.target.dataset.id);
+  product.Quantity = 1;
   addProductToCart(product);
   animateCart();
 }
