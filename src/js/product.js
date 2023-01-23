@@ -19,8 +19,6 @@ function addProductToCart(product) {
     if (added == false) {
       currentCart.push(product);
     }
-    +
-    
   } 
   else{
     currentCart = [product];
