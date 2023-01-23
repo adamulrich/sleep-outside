@@ -1,6 +1,7 @@
 import {
     getLocalStorage,
-    setLocalStorage
+    setLocalStorage, 
+    setClick
 } from './utils.mjs';
 import {
     displaySuperscriptNumber
@@ -12,11 +13,9 @@ function renderCartContents() {
     if (cartItems != null) {
         htmlItems = cartItems.map((item) => cartItemTemplate(item));
         document.querySelector('.product-list').innerHTML = htmlItems.join('');
-        let i;
-        const deleteButtons = document.querySelectorAll('.cart-card__delete');
-        for (i = 0; i < deleteButtons.length; i++) {
-            deleteButtons[i].addEventListener('click', deleteCartItem);
-        }
+        document.querySelectorAll('.cart-card__delete').forEach(function (item) {
+            setClick(`#${item.getAttribute('id')}`,deleteCartItem)
+        });
     } else document.querySelector('.product-list').innerHTML = '';
 }
 
@@ -34,7 +33,7 @@ function cartItemTemplate(item) {
   <p class='cart-card__color'>${item.Colors[0].ColorName}</p>
   <p class='cart-card__quantity'>qty: ${item.Quantity}</p>
   <p class='cart-card__price'>$${item.FinalPrice}</p>
-  <button data-id='${item.Id}' class='cart-card__delete'>X</button>
+  <button id='deleteButton_${item.Id}' data-id='${item.Id}' class='cart-card__delete'>X</button>
   
 </li>`;
 
