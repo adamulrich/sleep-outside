@@ -15,6 +15,7 @@ export function displaySuperscriptNumber() {
     }
     ssn.innerHTML = number;
   } else {
+    ssn.classList.add('is-empty');
     return;
   }
 }

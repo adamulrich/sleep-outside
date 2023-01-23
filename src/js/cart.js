@@ -1,4 +1,5 @@
 import { getLocalStorage, setLocalStorage } from './utils.mjs';
+import { displaySuperscriptNumber } from './main.js';
 
 function renderCartContents() {
   const cartItems = getLocalStorage('so-cart');
@@ -16,10 +17,11 @@ function renderCartContents() {
       deleteButtons[i].addEventListener('click', deleteClickHandler);
       
     }
+  } else
+  document.querySelector('.product-list').innerHTML = '';
 
-
-  }
 }
+
 
 function cartItemTemplate(item) {
   const newItem = `<li class='cart-card divider'>
@@ -47,15 +49,15 @@ function displayTotal() {
   const totalSum = document.getElementById('total-sum');
   if (cartItems != null) {
     totalSection.classList.add('show');
+    let total = 0,
+    i = 0;
+    for (i = 0; i < cartItems.length; i++) {
+      total += parseFloat(cartItems[i].FinalPrice);
+    }
+    totalSum.innerText = Math.round(total * 100) / 100;
   } else {
     totalSection.classList.remove('show');
   }
-  let total = 0,
-    i = 0;
-  for (i = 0; i < cartItems.length; i++) {
-    total += parseFloat(cartItems[i].FinalPrice);
-  }
-  totalSum.innerText = Math.round(total * 100) / 100;
 }
 
 function deleteCartItem(e) {
@@ -65,6 +67,7 @@ function deleteCartItem(e) {
   setLocalStorage('so-cart', cartItems);
   renderCartContents();
   displayTotal();
+  displaySuperscriptNumber();
 }
 
 displayTotal();
