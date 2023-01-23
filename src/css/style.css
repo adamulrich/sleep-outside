@@ -102,7 +102,7 @@ button {
   position: relative;
   text-align: center;
 }
-.pulse svg{
+.pulse svg {
   animation: pulse 0.25s ease-in-out;
 }
 .cart svg {
@@ -112,23 +112,22 @@ button {
   fill: gray;
 }
 
-@keyframes pulse{
-  0%{
+@keyframes pulse {
+  0% {
     opacity: 1;
-    transform: scale(1)
+    transform: scale(1);
   }
-  50%{
-    opacity: .5;
-    transform: scale(1.25)
+  50% {
+    opacity: 0.5;
+    transform: scale(1.25);
   }
-  100%{
+  100% {
     opacity: 1;
-    transform: scale(1)
+    transform: scale(1);
   }
-
 }
 
-.cart sub span{
+.cart sub span {
   position: relative;
   float: right;
   left: -16px;
@@ -255,7 +254,6 @@ button {
 .cart-card__delete {
   grid-row: 1;
   grid-column: 4;
-
 }
 
 button.cart-card__delete {
@@ -268,8 +266,6 @@ button.cart-card__delete {
   font-size: var(--large-font);
   cursor: pointer;
 }
-
-
 
 .total {
   display: none;

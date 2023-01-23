@@ -7,7 +7,7 @@
     "start": "vite",
     "build": "vite build --emptyOutDir",
     "lint": "eslint *.js src/**/*.js",
-    "format": "prettier --ignore-path ./.gitignore --write \"./**/*.{html,json,js,ts,css}\"",
+    "format": "beautify",
     "test": "jest"
   },
   "author": "Shane Thompson",
@@ -31,5 +31,9 @@
     "last 3 opera versions",
     "last 3 ios_saf versions",
     "last 3 safari versions"
-  ]
+  ],
+  "dependencies": {
+    "beautify": "^0.0.8",
+    "js-beautify": "^1.14.7"
+  }
 }
