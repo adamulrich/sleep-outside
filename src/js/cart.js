@@ -12,14 +12,10 @@ function renderCartContents() {
     if (cartItems != null) {
         htmlItems = cartItems.map((item) => cartItemTemplate(item));
         document.querySelector('.product-list').innerHTML = htmlItems.join('');
-
+        let i;
         const deleteButtons = document.querySelectorAll('.cart-card__delete');
-        const deleteClickHandler = (e) => {
-            deleteCartItem(e);
-        };
-        let i = 0;
         for (i = 0; i < deleteButtons.length; i++) {
-            deleteButtons[i].addEventListener('click', deleteClickHandler);
+            deleteButtons[i].addEventListener('click', deleteCartItem);
         }
     } else document.querySelector('.product-list').innerHTML = '';
 }
@@ -39,6 +35,7 @@ function cartItemTemplate(item) {
   <p class='cart-card__quantity'>qty: ${item.Quantity}</p>
   <p class='cart-card__price'>$${item.FinalPrice}</p>
   <button data-id='${item.Id}' class='cart-card__delete'>X</button>
+  
 </li>`;
 
     return newItem;
@@ -61,14 +58,16 @@ function displayTotal() {
     }
 }
 
-function deleteCartItem(e) {
+function deleteCartItem() {
     const cartItems = getLocalStorage('so-cart');
-    var index = cartItems.findIndex((obj) => obj.name == e['data-id']);
-    cartItems.splice(index, 1);
-    setLocalStorage('so-cart', cartItems);
-    renderCartContents();
-    displayTotal();
-    displaySuperscriptNumber();
+    const index = cartItems.findIndex(obj => obj.Id == this.getAttribute('data-id'));
+    if (index >= 0) {
+        cartItems.splice(index, 1);
+        setLocalStorage('so-cart', cartItems);
+        renderCartContents();
+        displayTotal();
+        displaySuperscriptNumber();
+    }
 }
 
 displayTotal();
