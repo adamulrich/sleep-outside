@@ -6,15 +6,21 @@ const dataSource = new ProductData('tents');
 
 function addProductToCart(product) {
   let currentCart = getLocalStorage('so-cart');
+  let added = false;
   if (currentCart != null) {
     for(let i = 0; i < currentCart.length; i++){
-      if (JSON.stringify(currentCart[i]) === JSON.stringify(product)){
-        product.Quantity +=1;
+      if (product.Id == currentCart[i].Id) {
+        product.Quantity = currentCart[i].Quantity + 1;
         product.FinalPrice *= product.Quantity
-        currentCart.splice(i, 1);
+        currentCart.splice(i, 1, product);
+        added = true;
       }
     }
-    currentCart.push(product);
+    if (added == false) {
+      currentCart.push(product);
+    }
+    +
+    
   } 
   else{
     currentCart = [product];
