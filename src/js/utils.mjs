@@ -7,15 +7,33 @@ export function qs(selector, parent = document) {
 
 // retrieve data from localstorage
 export function getLocalStorage(key) {
-    return JSON.parse(window.localStorage.getItem(key));
+    try {
+        return JSON.parse(localStorage.getItem(key));
+    }
+    catch (error) {
+        // cart is corrupted, remote it.
+        localStorage.removeItem(key);
+        return null;
+    }
 }
 // save data to local storage
 export function setLocalStorage(key, data) {
-    if (JSON.stringify(data) === '[]') {
-        window.localStorage.removeItem(key);
-    } else {
-        window.localStorage.setItem(key, JSON.stringify(data));
+    try {
+        // if it's an empty list because we've deleted items, remove the key
+        if (JSON.stringify(data) === '[]') {
+            localStorage.removeItem(key);
+        } else {
+        
+            localStorage.setItem(key, JSON.stringify(data));
+        }
     }
+    catch (error) {
+        console.log(error);
+        // cart is corrupted, remote it.
+        localStorage.removeItem(key);
+    } 
+        
+    
 }
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
