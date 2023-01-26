@@ -1,4 +1,6 @@
 // Superscript number on cart
+import ProductData from './ProductData.mjs';
+
 import {
     getLocalStorage
 } from './utils.mjs';
@@ -26,3 +28,11 @@ export function displaySuperscriptNumber() {
     }
 }
 displaySuperscriptNumber();
+
+function displayProductCards(){
+    const products = new ProductData('tents').findAllProducts;
+    products.map((product) => {
+        const li = document.createElement('li');
+        li.classList('roduct-card');
+    });
+}
