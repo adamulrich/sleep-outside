@@ -15,6 +15,10 @@ export function displaySuperscriptNumber() {
         for (let i = 0; i < items.length; i++) {
             number += parseFloat(items[i].Quantity);
         }
+        if (isNaN(number)) {
+            ssn.innerHTML = '';
+            localStorage.removeItem('so-cart');
+        }
         ssn.innerHTML = number;
     } else {
         ssn.classList.add('is-empty');

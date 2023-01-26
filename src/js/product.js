@@ -17,6 +17,7 @@ function addProductToCart(product) {
             if (product.Id == currentCart[i].Id) {
                 product.Quantity = currentCart[i].Quantity + 1;
                 product.FinalPrice *= product.Quantity;
+                product.FinalPrice = Math.round(product.FinalPrice * 100) / 100;
                 currentCart.splice(i, 1, product);
                 added = true;
             }
