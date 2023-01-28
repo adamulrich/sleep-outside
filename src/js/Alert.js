@@ -9,8 +9,8 @@ function convertToJson(res) {
 export default class Alert{
     constructor(alert){
         alert.message = message;
-        alert.background = background;
-        alert.color = color;
+        this.background = background;
+        this.color = color;
         this.path = `../json/alerts.json`;
     }
     getData() {
@@ -26,8 +26,7 @@ export default class Alert{
             document.body.appendChild(alertSection);
             for (let i = 0; i < alerts.length; i++){
                 alert.message = alert[i].mesasage;
-                alert.background = alert[i].backgrouind;
-                alert.color = alert[i].color;
+                alert.style='background-color:${alert[i].background}; color:${alert[i].color};';
                 alert = document.createElement('p');
                 document.querySelector('.alert-list').appendChild(alert)
             }
