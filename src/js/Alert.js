@@ -8,9 +8,9 @@ function convertToJson(res) {
 
 export default class Alert{
     constructor(alert){
-        this.message = message;
-        this.background = background;
-        this.color = color;
+        alert.message = message;
+        alert.background = background;
+        alert.color = color;
         this.path = `../json/alerts.json`;
     }
     getData() {
@@ -18,5 +18,19 @@ export default class Alert{
             .then(convertToJson)
             .then((data) => data);
     }
-    
+    displayAlerts(){
+        const alerts = this.getData();
+        if (Object.entries(alerts).length != 0){
+            const alertSection = document.createElement('section');
+            alertSection.class = 'alert-list';
+            document.body.appendChild(alertSection);
+            for (let i = 0; i < alerts.length; i++){
+                alert.message = alert[i].mesasage;
+                alert.background = alert[i].backgrouind;
+                alert.color = alert[i].color;
+                alert = document.createElement('p');
+                document.querySelector('.alert-list').appendChild(alert)
+            }
+        }
+    }
 }
