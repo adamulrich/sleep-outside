@@ -34,7 +34,6 @@
   ],
   "dependencies": {
     "beautify": "^0.0.8",
-    "js-beautify": "^1.14.7",
-    "nodemon": "^2.0.20"
+    "js-beautify": "^1.14.7"
   }
 }
