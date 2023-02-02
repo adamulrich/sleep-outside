@@ -14,39 +14,40 @@ function renderCartContents() {
         htmlItems = cartItems.map((item) => cartItemTemplate(item));
         document.querySelector('.product-list').innerHTML = htmlItems.join('');
         document.querySelectorAll('.cart-card__delete').forEach(function (item) {
-            setClick(`#${item.getAttribute('id')}`,deleteCartItem)
+            setClick(`#${item.getAttribute('id')}`, deleteCartItem)
         });
         document.querySelectorAll('.cart-card-quantity-up').forEach(function (item) {
-            setClick(`#${item.getAttribute('id')}`,changeCartItemQuantity(1))
+            setClick(`#${item.getAttribute('id')}`, increaseCartItemQuantity)
         });
         document.querySelectorAll('.cart-card-quantity-down').forEach(function (item) {
-            setClick(`#${item.getAttribute('id')}`,changeCartItemQuantity(-1))
+            setClick(`#${item.getAttribute('id')}`, decreaseCartItemQuantity)
         });
 
-    } else document.querySelector('.product-list').innerHTML = '';
-
+    } else {
+        document.querySelector('.product-list').innerHTML = '';
+    }
 }
 
 function cartItemTemplate(item) {
-    const newItem = `<li class='cart-card divider'>
-  <a href='#' class='cart-card__image'>
-    <img
-      src='${item.Image}'
-      alt='${item.Name}'
-    />
-  </a>
-  <a href='#'>
-    <h2 class='card__name'>${item.Name}</h2>
-  </a>
-    <p class='cart-card__color'>${item.Colors[0].ColorName}</p>
-    <div class="counter">
-        <button id='quantityDown_${item.Id}' data-id='${item.Id}' class='cart-card-quantity-up'>+</button> 
-        <p class='cart-card__quantity'> ${item.Quantity}</p>
-        <button id='quantityDown_${item.Id}' data-id='${item.Id}' class='cart-card-quantity-down'>+</button> 
-    </div>
-  <p class='cart-card__price'>$${item.FinalPrice}</p>
-  <button id='deleteButton_${item.Id}' data-id='${item.Id}' class='cart-card__delete'>X</button>
-  </li>`;
+    const newItem = `
+    <li class='cart-card divider'>
+        <a href='#' class='cart-card__image'>
+            <img src='${item.Image}' alt='${item.Name}' />
+        </a>
+        <a href='#'>
+            <h2 class='card__name'>${item.Name}</h2>
+        </a>
+        <p class='cart-card__color'>${item.Colors[0].ColorName}</p>
+        <div class='cart-details-container'>
+            <div class='counter'>
+                <button id='quantityDown_${item.Id}' data-id='${item.Id}' class='cart-card-quantity-down'>-</button> 
+                <p class='cart-card__quantity'> ${item.Quantity}</p>
+                <button id='quantityUp_${item.Id}' data-id='${item.Id}' class='cart-card-quantity-up'>+</button> 
+            </div>
+            <p class='cart-card__price'>$${item.FinalPrice}</p>
+            <button id='deleteButton_${item.Id}' data-id='${item.Id}' class='cart-card__delete'>X</button>
+        </div>
+    </li>`;
     return newItem;
 }
 
@@ -67,15 +68,27 @@ function displayTotal() {
     }
 }
 
-function changeCartItemQuantity(value) {
+function increaseCartItemQuantity() {
+    changeCartItemQuantity(this, 1)
+}
+
+function decreaseCartItemQuantity() {
+    changeCartItemQuantity(this, -1)
+}
+
+
+function changeCartItemQuantity(that, value) {
     //get cart
     const cartItems = getLocalStorage('so-cart');
 
     // find index of item
-    const index = cartItems.findIndex(obj => obj.Id == this.getAttribute('data-id'));
+    const index = cartItems.findIndex(obj => obj.Id == that.getAttribute('data-id'));
 
     // change quantity by value
-    cartItems[index].quantity += value;
+    const newValue = (cartItems[index].Quantity + value)
+    if (newValue >= 1 && newValue <= 10) {
+        cartItems[index].Quantity += value;
+    }
 
     //save cart
     setLocalStorage('so-cart', cartItems);

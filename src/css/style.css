@@ -252,7 +252,7 @@ button {
 }
 
 .cart-card p {
-  margin-top: 0;
+  margin-top: auto;
 }
 
 .cart-card .card__name {
@@ -277,6 +277,9 @@ button {
 .cart-card__price {
   grid-row: 2;
   grid-column: 3;
+  margin-left: 30px;
+  margin-top: 10px;
+  font-size: larger;
 }
 
 .cart-card__delete {
@@ -322,25 +325,25 @@ button.cart-card__delete {
   }
 }
 
+
+.cart-details-container {
+  width: 300px;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+}
+
 .counter {
   user-select: none;
   display: flex;
   justify-content: center;
+  
 }
-.cart-card__quantity {
-  margin: 0 auto;
-  /* width: 50px; */
-  padding: 8px;
-  font-size: 18px;
-  text-align: center;
-  text-justify: center;
-  background: var(--primary-color);
-  color: #fff;
-
-}
-.counter span {
+.counter button {
   display: block;
   width: 30px;
+  height: 40px;
   background: var(--light-grey);
   color: #fff;
   font-size: 25px;
@@ -348,8 +351,23 @@ button.cart-card__delete {
   text-align: center;
   text-justify: center;
   user-select: none;
-  margin: 0 auto;
-  padding: 3px 0 0 0;
+  margin: 10px 5px;
+  padding: 5px 0 0 0;
+}
+
+p.cart-card__quantity {
+  display: block;
+  width: 30px;
+  height: 40px;
+  font-size: 25px;
+  cursor: pointer;
+  text-align: center;
+  text-justify: center;
+  user-select: none;
+  margin: 10px 5px;
+  padding: 5px 0 0 0;
+  background-color: var(--primary-color);
+  color: #fff;
 }
 
 footer {
