@@ -43,3 +43,30 @@ export function setClick(selector, callback) {
     });
     qs(selector).addEventListener('click', callback);
 }
+
+// export function renderWithTemplate(templateFn, parentElement, list, position = 'afterbegin', clear = false) {
+//     const htmlStrings = list.map(templateFn);
+//     if (clear) {
+//         parentElement.innerHTML = htmlStrings.join('');
+//     } else {
+//         parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
+//     }
+
+export function renderWithTemplate(htmlContent, parentElement, position = 'afterbegin',clear = false, data = null, callback = null) {
+    if (clear){
+        parentElement.innerHTML = htmlContent;
+    } else{
+        parentElement.insertAdjacentHTML(position, htmlContent);
+    }
+    if(callback) {
+        callback(data);
+    }
+}
+
+export async function loadTemplate(filePath) {
+    const response = await fetch(filePath);
+    if (response.ok) {
+        const textData = await response.text();
+        return textData;
+    }
+}
