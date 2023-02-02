@@ -55,14 +55,18 @@ function displayTotal() {
     const cartItems = getLocalStorage('so-cart');
     const totalSection = document.querySelector('.total');
     const totalSum = document.getElementById('total-sum');
+    const totalItems = document.getElementById('total-items');
     if (cartItems != null) {
         totalSection.classList.add('show');
         let total = 0,
+            totalItemCount = 0,
             i = 0;
         for (i = 0; i < cartItems.length; i++) {
+            totalItemCount += parseInt(cartItems[i].Quantity);
             total += parseFloat(cartItems[i].FinalPrice * cartItems[i].Quantity);
         }
         totalSum.innerText = Math.round(total * 100) / 100;
+        totalItems.innerText = totalItemCount
     } else {
         totalSection.classList.remove('show');
     }
