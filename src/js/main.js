@@ -12,8 +12,9 @@ loadHeaderFooter();
 async function loadHeaderFooter() {
     const header = await loadTemplate('../partials/header.html');
     const footer = await loadTemplate('../partials/footer.html');
-    renderWithTemplate(header, document.body)
-    renderWithTemplate(footer,document.body, 'beforeend')
+    renderWithTemplate(header, document.getElementById('main-header'),'beforebegin',  true);
+    renderWithTemplate(footer,document.getElementById('main-footer'), 'beforeend', true);
+    displaySuperscriptNumber();
 }
 
 export function displaySuperscriptNumber() {
@@ -45,4 +46,4 @@ export function displaySuperscriptNumber() {
 }
 
 
-displaySuperscriptNumber();
+

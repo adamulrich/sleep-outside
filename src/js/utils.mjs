@@ -52,8 +52,12 @@ export function setClick(selector, callback) {
 //         parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
 //     }
 
-export function renderWithTemplate(htmlContent, parentElement, position = 'afterbegin', data = null, callback = null) {
-    parentElement.insertAdjacentHTML(position, htmlContent);
+export function renderWithTemplate(htmlContent, parentElement, position = 'afterbegin',clear = false, data = null, callback = null) {
+    if (clear){
+        parentElement.innerHTML = htmlContent;
+    } else{
+        parentElement.insertAdjacentHTML(position, htmlContent);
+    }
     if(callback) {
         callback(data);
     }
