@@ -1,6 +1,6 @@
 import {
     getLocalStorage,
-    setLocalStorage, 
+    setLocalStorage,
     setClick
 } from './utils.mjs';
 import {
@@ -16,7 +16,15 @@ function renderCartContents() {
         document.querySelectorAll('.cart-card__delete').forEach(function (item) {
             setClick(`#${item.getAttribute('id')}`,deleteCartItem)
         });
+        document.querySelectorAll('.cart-card-quantity-up').forEach(function (item) {
+            setClick(`#${item.getAttribute('id')}`,changeCartItemQuantity(1))
+        });
+        document.querySelectorAll('.cart-card-quantity-down').forEach(function (item) {
+            setClick(`#${item.getAttribute('id')}`,changeCartItemQuantity(-1))
+        });
+
     } else document.querySelector('.product-list').innerHTML = '';
+
 }
 
 function cartItemTemplate(item) {
@@ -30,13 +38,15 @@ function cartItemTemplate(item) {
   <a href='#'>
     <h2 class='card__name'>${item.Name}</h2>
   </a>
-  <p class='cart-card__color'>${item.Colors[0].ColorName}</p>
-  <p class='cart-card__quantity'>qty: ${item.Quantity}</p>
+    <p class='cart-card__color'>${item.Colors[0].ColorName}</p>
+    <div class="counter">
+        <button id='quantityDown_${item.Id}' data-id='${item.Id}' class='cart-card-quantity-up'>+</button> 
+        <p class='cart-card__quantity'> ${item.Quantity}</p>
+        <button id='quantityDown_${item.Id}' data-id='${item.Id}' class='cart-card-quantity-down'>+</button> 
+    </div>
   <p class='cart-card__price'>$${item.FinalPrice}</p>
   <button id='deleteButton_${item.Id}' data-id='${item.Id}' class='cart-card__delete'>X</button>
-  
-</li>`;
-
+  </li>`;
     return newItem;
 }
 
@@ -49,13 +59,31 @@ function displayTotal() {
         let total = 0,
             i = 0;
         for (i = 0; i < cartItems.length; i++) {
-            total += parseFloat(cartItems[i].FinalPrice);
+            total += parseFloat(cartItems[i].FinalPrice * cartItems[i].Quantity);
         }
         totalSum.innerText = Math.round(total * 100) / 100;
     } else {
         totalSection.classList.remove('show');
     }
 }
+
+function changeCartItemQuantity(value) {
+    //get cart
+    const cartItems = getLocalStorage('so-cart');
+
+    // find index of item
+    const index = cartItems.findIndex(obj => obj.Id == this.getAttribute('data-id'));
+
+    // change quantity by value
+    cartItems[index].quantity += value;
+
+    //save cart
+    setLocalStorage('so-cart', cartItems);
+    renderCartContents();
+    displayTotal();
+    displaySuperscriptNumber();
+}
+
 
 function deleteCartItem() {
     const cartItems = getLocalStorage('so-cart');

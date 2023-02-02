@@ -285,7 +285,7 @@ button {
 }
 
 button.cart-card__delete {
-  padding: 0.5em 1em;
+  padding: 0.3em 0.5em;
   background-color: var(--primary-color);
   color: black;
   margin: auto;
@@ -320,6 +320,36 @@ button.cart-card__delete {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
   }
+}
+
+.counter {
+  user-select: none;
+  display: flex;
+  justify-content: center;
+}
+.cart-card__quantity {
+  margin: 0 auto;
+  /* width: 50px; */
+  padding: 8px;
+  font-size: 18px;
+  text-align: center;
+  text-justify: center;
+  background: var(--primary-color);
+  color: #fff;
+
+}
+.counter span {
+  display: block;
+  width: 30px;
+  background: var(--light-grey);
+  color: #fff;
+  font-size: 25px;
+  cursor: pointer;
+  text-align: center;
+  text-justify: center;
+  user-select: none;
+  margin: 0 auto;
+  padding: 3px 0 0 0;
 }
 
 footer {
