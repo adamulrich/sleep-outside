@@ -43,15 +43,3 @@ export function setClick(selector, callback) {
     });
     qs(selector).addEventListener('click', callback);
 }
-
-export function addItemToCart() { }
-
-export function removeItemFromCart() { }
-
-export function findCartItemIndexById(itemId, cart) {
-    var index = cart.findIndex(function(item, i){
-        return item.Id === itemId
-    });
-    return index;
-
-}
