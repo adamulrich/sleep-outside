@@ -12,11 +12,15 @@
 </head>
 
 <body>
-    <header class = 'divider' id = 'main-header'></header>
-    <section class = 'alert-list'></section>
+    <header class='divider' id='main-header'></header>
+    <section class='alert-list'></section>
     <main class="divider">
         <div class="hero">
-            <img src="/images/banner-sm.jpg" srcset="images/banner-sm.jpg 500w, images/banner.jpg" alt="image of a high mountain lake" />
+            <picture>
+                <source media="(max-width: 425px)" srcset="images/banner-sm.jpg">
+                <img src="/images/banner.jpg" alt="image of a high mountain lake" />
+            </picture>
+
             <div class="logo logo--square">
                 <img src="/images/noun_Tent_2517.svg" alt="tent image for logo" />
                 <div>Sleep<span class="highlight">Outside</span></div>
@@ -69,7 +73,7 @@
             </ul>
         </section>
     </main>
-<footer id = 'main-footer'></footer>
+    <footer id='main-footer'></footer>
 </body>
 
 </html>
