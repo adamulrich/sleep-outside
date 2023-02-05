@@ -1,12 +1,18 @@
 import ProductData from './ProductData.mjs';
 
+let orderedProducts = [];
+
 async function displayProductCards(filteredList){
     const dataSource = new ProductData('tents')
     const products = await dataSource.findAllProducts();
     const filteredProducts = products.filter(product => 
         filteredList.includes(product.Id)
     );
-    filteredProducts.map((product) => {
+    if(orderedProducts.length < 1){
+        orderedProducts = [...filteredProducts];
+    }
+
+    orderedProducts.map((product) => {
         const li = document.createElement('li');
         li.setAttribute('class', 'product-card');
         const a = document.createElement('a');
@@ -46,5 +52,40 @@ async function displayProductCards(filteredList){
         p.appendChild(percentOff)
         document.querySelector('.product-list').appendChild(li);
     });
+
+    
 }
 displayProductCards(['880RR', '985RF', '985PR', '344YJ']);
+
+function orderProductCardsName(items){
+    items.sort(function (a, b) {
+        if (a.NameWithoutBrand < b.NameWithoutBrand) {
+            return -1;
+        }
+        if (a.NameWithoutBrand > b.NameWithoutBrand) {
+            return 1;
+        }
+        return 0;
+    });
+    return items
+}
+function orderProductCardsPrice(items){
+    const priceSort = (arr = []) => {
+        const sorter = (a, b) => +a.FinalPrice - +b.FinalPrice;
+        arr.sort(sorter);
+    };
+    priceSort(items)
+    return items
+}
+function displayOrderedProductsName(items, id){
+    document.getElementById(id).innerHTML = ''
+    orderProductCardsName(items);
+    displayProductCards(items);
+}
+function displayOrderedProductsPrice(items, id){
+    document.getElementById(id).innerHTML = ''
+    orderProductCardsPrice(items);
+    displayProductCards(items);
+} 
+document.getElementById('sort-price').onclick = function() {displayOrderedProductsPrice(orderedProducts, 'product-list')};
+document.getElementById('sort-name').onclick = function() {displayOrderedProductsName(orderedProducts, 'product-list')};

@@ -104,7 +104,32 @@ button {
   font-size: var(--large-font);
   cursor: pointer;
 }
+.btn-group button {
+  padding: 0.5em 2em;
+  background-color: var(--secondary-color);
+  color: white; 
+  margin: auto;
+  display: block;
+  border: 1px solid var(--dark-grey);
+  font-size: var(--small-font);
+  cursor: pointer;
+  float: left;
+}
 
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none; 
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: var(--dark-grey);
+}
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }
