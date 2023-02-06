@@ -303,10 +303,18 @@ button.cart-card__delete {
 }
 
 .total.show {
-  display: block;
-  text-align: right;
-  width: 95%;
-  max-width: 750px;
+  display: flex;
+  justify-content: flex-end;
+  width: 90%;
+  gap: 10px;
+}
+
+section.total p {
+  font-weight: bolder;
+}
+
+section.total p span {
+  font-weight: 400;
 }
 
 @media screen and (min-width: 500px) {
