@@ -1,14 +1,16 @@
 import ProductData from './ProductData.mjs';
 const category = new URLSearchParams(window.location.search).get('category');
 document.getElementById('categoryName').innerText = category.charAt(0).toUpperCase() + category.slice(1);
+let productList = [];
 
 async function displayProductCards(productCategory){
-    console.log(productCategory);
     const dataSource = new ProductData(productCategory);
     const products = await dataSource.findAllProducts(productCategory);
+    productList = products;
     products.map((product) => {
         const li = document.createElement('li');
         li.setAttribute('class', 'product-card');
+        li.setAttribute('id', `product-${product.Id}`);
         const a = document.createElement('a');
         a.setAttribute('href', `../product_pages/index.html?productId=${product.Id}&category=${productCategory}`)
         const img = document.createElement('img');
@@ -48,3 +50,42 @@ async function displayProductCards(productCategory){
     });
 }
 displayProductCards(category);
+
+function orderProductCardsName(items){
+    items.sort(function (a, b) {
+        if (a.NameWithoutBrand < b.NameWithoutBrand) {
+            return -1;
+        }
+        if (a.NameWithoutBrand > b.NameWithoutBrand) {
+            return 1;
+        }
+        return 0;
+    });
+    return items
+}
+function orderProductCardsPrice(items){
+    const priceSort = (arr = []) => {
+        const sorter = (a, b) => +a.FinalPrice - +b.FinalPrice;
+        arr.sort(sorter);
+    };
+    priceSort(items)
+    return items
+}
+function displayOrderedProductsName(items){
+    orderProductCardsName(items);
+    let x = 1;
+    for (let i = 0; i < items.length; i++) {
+        document.getElementById(`product-${items[i].Id}`).style.order = x;
+        x++;
+    }
+}
+function displayOrderedProductsPrice(items){
+    orderProductCardsPrice(items);
+    let x = 1;
+    for (let i = 0; i < items.length; i++) {
+        document.getElementById(`product-${items[i].Id}`).style.order = x;
+        x++;
+    }
+} 
+document.getElementById('sort-price').onclick = function() {displayOrderedProductsPrice(productList)};
+document.getElementById('sort-name').onclick = function() {displayOrderedProductsName(productList)};
