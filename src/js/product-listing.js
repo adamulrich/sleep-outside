@@ -2,14 +2,15 @@ import ProductData from './ProductData.mjs';
 const category = new URLSearchParams(window.location.search).get('category');
 document.getElementById('categoryName').innerText = category.charAt(0).toUpperCase() + category.slice(1);
 
-async function displayProductCards(){
-    const dataSource = new ProductData(category);
-    const products = await dataSource.findAllProducts();
+async function displayProductCards(productCategory){
+    console.log(productCategory);
+    const dataSource = new ProductData(productCategory);
+    const products = await dataSource.findAllProducts(productCategory);
     products.map((product) => {
         const li = document.createElement('li');
         li.setAttribute('class', 'product-card');
         const a = document.createElement('a');
-        a.setAttribute('href', `../product_pages/index.html?productId=${product.Id}`)
+        a.setAttribute('href', `../product_pages/index.html?productId=${product.Id}&category=${productCategory}`)
         const img = document.createElement('img');
         img.setAttribute('src', product.Images.PrimaryExtraLarge);
         img.setAttribute('alt', `Image of ${product.Name}`);
@@ -46,4 +47,4 @@ async function displayProductCards(){
         document.querySelector('.product-list').appendChild(li);
     });
 }
-displayProductCards();
+displayProductCards(category);

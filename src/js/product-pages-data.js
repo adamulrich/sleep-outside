@@ -1,6 +1,6 @@
 import ProductData from './ProductData.mjs';
-
-const dataSource = new ProductData('tents');
+const category = new URLSearchParams(window.location.search).get('category');
+const dataSource = new ProductData(category);
 
 async function buildDetailsPage() {
     const productId = new URLSearchParams(document.location.search).get(
