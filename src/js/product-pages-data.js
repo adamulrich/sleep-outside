@@ -1,6 +1,6 @@
 import ProductData from './ProductData.mjs';
-
-const dataSource = new ProductData('tents');
+const category = new URLSearchParams(window.location.search).get('category');
+const dataSource = new ProductData(category);
 
 async function buildDetailsPage() {
     const productId = new URLSearchParams(document.location.search).get(
@@ -15,7 +15,7 @@ async function buildDetailsPage() {
     document.getElementById(
         'product-suggested-retail-price'
     ).innerText = `$${product.SuggestedRetailPrice}`;
-    document.getElementById('product-image').src = product.Image;
+    document.getElementById('product-image').src = product.Images.PrimaryExtraLarge;
     document.getElementById('product-image').alt = product.Name;
     document.getElementById('product-name-without-brand').innerText =
         product.NameWithoutBrand;

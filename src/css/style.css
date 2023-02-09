@@ -176,8 +176,12 @@ button {
 .products {
   padding: 0.5em;
 }
+.product-categories img{
+  width: 180px;
+}
 
-.product-list {
+.product-list,
+.product-categories {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
@@ -185,9 +189,15 @@ button {
   padding: 0;
 }
 
-.product-list a {
+.product-categories {
+  justify-content: space-around;
+}
+
+.product-list a,
+.product-categories a {
   text-decoration: none;
   color: var(--dark-grey);
+  text-align: center;
 }
 
 /* Styles for product lists */

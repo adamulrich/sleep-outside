@@ -1,18 +1,18 @@
 import ProductData from './ProductData.mjs';
+const category = new URLSearchParams(window.location.search).get('category');
+document.getElementById('categoryName').innerText = category.charAt(0).toUpperCase() + category.slice(1);
 
-async function displayProductCards(filteredList){
-    const dataSource = new ProductData('tents')
-    const products = await dataSource.findAllProducts();
-    const filteredProducts = products.filter(product => 
-        filteredList.includes(product.Id)
-    );
-    filteredProducts.map((product) => {
+async function displayProductCards(productCategory){
+    console.log(productCategory);
+    const dataSource = new ProductData(productCategory);
+    const products = await dataSource.findAllProducts(productCategory);
+    products.map((product) => {
         const li = document.createElement('li');
         li.setAttribute('class', 'product-card');
         const a = document.createElement('a');
-        a.setAttribute('href', `product_pages/index.html?productId=${product.Id}`)
+        a.setAttribute('href', `../product_pages/index.html?productId=${product.Id}&category=${productCategory}`)
         const img = document.createElement('img');
-        img.setAttribute('src', product.Image);
+        img.setAttribute('src', product.Images.PrimaryExtraLarge);
         img.setAttribute('alt', `Image of ${product.Name}`);
         const h3 = document.createElement('h3');
         h3.setAttribute('class', 'card__brand');
@@ -47,4 +47,4 @@ async function displayProductCards(filteredList){
         document.querySelector('.product-list').appendChild(li);
     });
 }
-displayProductCards(['880RR', '985RF', '985PR', '344YJ']);
+displayProductCards(category);

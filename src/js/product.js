@@ -7,7 +7,8 @@ import {
     displaySuperscriptNumber
 } from './main.js';
 
-const dataSource = new ProductData('tents');
+const category = new URLSearchParams(window.location.search).get('category');
+const dataSource = new ProductData(category);
 
 function addProductToCart(product) {
     let currentCart = getLocalStorage('so-cart');
