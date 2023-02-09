@@ -15,7 +15,7 @@ async function buildDetailsPage() {
     document.getElementById(
         'product-suggested-retail-price'
     ).innerText = `$${product.SuggestedRetailPrice}`;
-    document.getElementById('product-image').src = product.Image;
+    document.getElementById('product-image').src = product.Images.PrimaryExtraLarge;
     document.getElementById('product-image').alt = product.Name;
     document.getElementById('product-name-without-brand').innerText =
         product.NameWithoutBrand;

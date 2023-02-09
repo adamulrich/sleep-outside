@@ -12,11 +12,9 @@ export default class ProductData {
     constructor(category) {
         this.category = category;
     }
-    async getData(category) {
-        const response = await fetch(baseURL + `products/search/${category}`);
+    async getData() {
+        const response = await fetch(baseURL + `products/search/${this.category}`);
         const data = await convertToJson(response);
-        console.log(data)
-        console.log(category)
         return data.Result;
     }
     async findProductById(id) {
@@ -24,7 +22,7 @@ export default class ProductData {
         return products.find((item) => item.Id === id);
     }
     async findAllProducts() {
-        const products = await this.getData(this.category);
+        const products = await this.getData();
         return products;
     }
 }
