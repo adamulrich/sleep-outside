@@ -1,4 +1,5 @@
 import ProductData from './ProductData.mjs';
+import gsap from 'gsap';
 const category = new URLSearchParams(window.location.search).get('category');
 document.getElementById('categoryName').innerText = category.charAt(0).toUpperCase() + category.slice(1);
 let productList = [];
@@ -71,21 +72,61 @@ function orderProductCardsPrice(items){
     priceSort(items)
     return items
 }
-function displayOrderedProductsName(items){
-    orderProductCardsName(items);
-    let x = 1;
-    for (let i = 0; i < items.length; i++) {
-        document.getElementById(`product-${items[i].Id}`).style.order = x;
-        x++;
-    }
-}
-function displayOrderedProductsPrice(items){
-    orderProductCardsPrice(items);
-    let x = 1;
+
+function itemReorder(orderFunction, items) {
+    orderFunction(items);
+    let x = 0;
     for (let i = 0; i < items.length; i++) {
         document.getElementById(`product-${items[i].Id}`).style.order = x;
         x++;
     }
 } 
-document.getElementById('sort-price').onclick = function() {displayOrderedProductsPrice(productList)};
-document.getElementById('sort-name').onclick = function() {displayOrderedProductsName(productList)};
+
+function layout(sortFunction, products) {
+    
+    var nodes = document.querySelectorAll('.product-card');
+    var total = nodes.length;
+    var ease  = 'power1.inOut';
+    var cards = [];
+
+    // get current position data.
+    for (var index = 0; index < total; index++) {
+        
+        var node = nodes[index];
+    
+        // Initialize transforms on node
+        gsap.set(node, { x: 0 });
+    
+        cards[index] = {
+            x: node.offsetLeft,
+            y: node.offsetTop,
+            node    
+        };
+    } 
+
+    itemReorder(sortFunction, products);
+    //createCSSRuleForReorder(sortFunction, products);
+
+    for (var j = 0; j < total; j++) {
+    
+        var card = cards[j];
+        
+        var lastX = card.x;
+        var lastY = card.y;
+    
+        card.x = card.node.offsetLeft;
+        card.y = card.node.offsetTop;
+    
+        // Continue if card hasn't moved
+        if (lastX === card.x && lastY === card.y) continue;
+    
+        // Reversed delta values taking into account current transforms    
+        var x = gsap.getProperty(card.node, 'x') + lastX - card.x;
+        var y = gsap.getProperty(card.node, 'y') + lastY - card.y;
+    
+        // Tween to 0 to remove the transforms
+        gsap.fromTo(card.node, { x, y }, { duration: 0.5, x: 0, y: 0, ease });            
+    }
+}
+document.getElementById('sort-price').onclick = function() { layout(orderProductCardsPrice, productList)};
+document.getElementById('sort-name').onclick = function () { layout(orderProductCardsName, productList) };
