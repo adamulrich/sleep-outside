@@ -186,6 +186,16 @@ button {
   display: none;
 }
 
+#call-to-register {
+  text-align: center;
+  font-size: larger;
+  background-color: #a4b8c4;
+  border-radius: 5px;
+}
+#call-to-register h3 {
+  padding: 20px;
+  margin: 5px;
+}
 /* End cart icon styles */
 
 .mission {
