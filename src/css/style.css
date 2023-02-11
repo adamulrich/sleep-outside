@@ -104,6 +104,9 @@ button {
   font-size: var(--large-font);
   cursor: pointer;
 }
+.btn-group p{
+  margin:auto
+}
 .btn-group button {
   padding: 0.5em 2em;
   background-color: var(--secondary-color);
@@ -132,6 +135,10 @@ button {
   border-bottom: 2px solid var(--primary-color);
 }
 
+.search input{
+  font-size: var(--small-font);
+  line-height: 2;
+}
 /* End utility classes */
 
 /* Cart icon styles */
@@ -182,7 +189,7 @@ button {
   border-radius: 200px;
 }
 
-.is-empty {
+.is-empty, .hide {
   display: none;
 }
 
