@@ -129,17 +129,15 @@ function layout(sortFunction, products) {
     }
 }
 function productSearch() {
-    let searchInput = document.getElementById('search-input').value;
-    let elements = productList;
-    let cards = document.querySelectorAll('.product-card');
+    let searchInput = document.getElementById('search-input').value
     //loop through all elements
-    elements.forEach((element, index) => {
-        cards[index].classList.add('hide');
+    productList.forEach((product) => {
+        let id = 'product-' + product.Id
+        document.getElementById(id).classList.remove('hide');
         //check if text includes the search value
-        if (element.Name.toUpperCase().includes(searchInput.toUpperCase())) {
-            let id = 'product-' + element.Id
+        if (!product.Name.toUpperCase().includes(searchInput.toUpperCase())) {
             //display matching card
-            document.getElementById(id).classList.remove('hide');
+            document.getElementById(id).classList.add('hide');
         } 
     });
 };
@@ -148,7 +146,10 @@ input.addEventListener('keypress', (function(event){
     if (event.key === 'Enter'){
         productSearch()
     }
-}))
+}));
+
+input.addEventListener('search',productSearch);
+   
 
 document.getElementById('sort-price').onclick = function() { layout(orderProductCardsPrice, productList)};
 document.getElementById('sort-name').onclick = function () { layout(orderProductCardsName, productList) };
