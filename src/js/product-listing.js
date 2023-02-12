@@ -128,5 +128,28 @@ function layout(sortFunction, products) {
         gsap.fromTo(card.node, { x, y }, { duration: 0.5, x: 0, y: 0, ease });            
     }
 }
+function productSearch() {
+    let searchInput = document.getElementById('search-input').value
+    //loop through all elements
+    productList.forEach((product) => {
+        let id = 'product-' + product.Id
+        document.getElementById(id).classList.remove('hide');
+        //check if text includes the search value
+        if (!product.Name.toUpperCase().includes(searchInput.toUpperCase())) {
+            //display matching card
+            document.getElementById(id).classList.add('hide');
+        } 
+    });
+};
+var input = document.getElementById('search-input');
+input.addEventListener('keypress', (function(event){
+    if (event.key === 'Enter'){
+        productSearch()
+    }
+}));
+
+input.addEventListener('search',productSearch);
+   
+
 document.getElementById('sort-price').onclick = function() { layout(orderProductCardsPrice, productList)};
 document.getElementById('sort-name').onclick = function () { layout(orderProductCardsName, productList) };
