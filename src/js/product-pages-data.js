@@ -10,8 +10,22 @@ async function buildDetailsPage() {
     document.getElementById('addToCart').setAttribute('data-id', productId);
     document.getElementById('product-descriptionhtmlsimple').innerHTML =
         product.DescriptionHtmlSimple;
-    document.getElementById('product-color-name').innerText =
-        product.Colors[0].ColorName;
+
+    // handle colors
+    let template = '';
+    product.Colors.forEach(color => {
+        // <input type="radio" name="color-selector" class="product_color" id="product-color-name"></p>
+        template += 
+        `<div class="div-radio-color">
+            <input type="radio" name="color-selector" id="${color.ColorCode}" class="radio-color">
+            <label for="${color.ColorCode}">${color.ColorName}<img class="swatch" src="${color.ColorChipImageSrc}" alt="swatch for color ${color.ColorName}"></label>
+            
+        </div>
+        `
+    });
+    document.getElementById('div-color-radio-buttons').innerHTML = template;
+    // document.getElementById('product-color-name').innerText =
+    //     product.Colors[0].ColorName;
     document.getElementById(
         'product-suggested-retail-price'
     ).innerText = `$${product.SuggestedRetailPrice}`;
