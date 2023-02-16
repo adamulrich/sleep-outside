@@ -432,16 +432,22 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+.div-radio-color {
+  display: flex;
+  align-items: center;
+  flex-flow: row wrap;
+  align-content: center;
 
+}
 .radio-color {
-  
   width: auto;
   height: auto;
-  display: block;
 }
-
+.div-radio-color label {
+  align-self: center;
+}
 .swatch {
-  height: 50px;
+  
   width: 50px;
   max-height: 50px;
   max-width: 80px;
