@@ -103,6 +103,7 @@ button {
   border: 0;
   font-size: var(--large-font);
   cursor: pointer;
+  border-radius: 5px;
 }
 .btn-group p{
   margin:auto
@@ -447,7 +448,8 @@ footer {
   align-self: center;
 }
 .swatch {
-  
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px #303030;
   width: 50px;
   max-height: 50px;
   max-width: 80px;
@@ -455,5 +457,6 @@ footer {
 
 #div-color-radio-buttons {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
+
 }
