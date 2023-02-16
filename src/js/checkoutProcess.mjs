@@ -1,13 +1,14 @@
 import {
     getLocalStorage,
     setLocalStorage,
-    setClick,
-    loadTemplate
 } from './utils.mjs';
+import {
+    displaySuperscriptNumber
+} from './main.js';
 
 import ExternalServices from './ExternalServices.mjs';
 
-    
+const orderSummaryHeader = document.getElementById('order-summary');    
 
 export default class CheckoutProcess {
 
@@ -53,14 +54,34 @@ export default class CheckoutProcess {
         // call the checkout method in our ExternalServices module and send it our data object.
         const ES = new ExternalServices;
         const formData = this.createDataFromForm();
-        const response = await ES.checkout(formData);
-        if (response.ok) {
-            const result = await response.text;
-            console.log(result)
-            setLocalStorage('so-cart', [])
+        let message = '';
+        let response = ''
+        try {
+            response =  await ES.checkout(formData);            
+            if (response.status == 200) {
+                message = await response.json().then();
+                console.log(message);
+                //clear cart
+                setLocalStorage('so-cart', []);
+                displaySuperscriptNumber();
+
+                // clear form
+                document.getElementById('section-header')
+                    .innerText = `Thank you for your order! Your order number is ${message.orderId}`;
+                document.getElementById('checkout-form').innerHTML = `<a href="../index.html">Return to Home Page</a>`;
+            } else {
+                message = await response.json().then();
+                console.log(`response: ${response.status}`);
+                console.log(message);
+            }
+        } catch (error) {
+            console.log(error)
+            console.log('response:' + response);
         }
 
     }
+
+    
 
     createDataFromForm() {
         const orderData = {};
@@ -98,6 +119,7 @@ export default class CheckoutProcess {
         this.tax = Math.round(this.tax * 100) / 100;
 
         this.orderTotal = this.itemTotal + this.shipping + this.tax;
+        this.orderTotal = Math.round(this.orderTotal * 100) / 100;
 
     }
 
@@ -108,8 +130,6 @@ export default class CheckoutProcess {
     }
 
     displayOrderSummary() {
-
-        const orderSummaryHeader = document.getElementById('order-summary');
     
         // add order subtotal to html element and place in hidden input
     
