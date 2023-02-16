@@ -288,7 +288,7 @@ button {
 /* Start cart list card styles */
 .cart-card {
   display: flex;
-  flex-flow: wrap row;
+  flex-flow: wrap column;
   justify-content: center;
   align-items: center;
 }
@@ -297,9 +297,21 @@ button {
   max-width: 100px;
 }
 
+.cart-card__image {
+  grid-area: img;
+}
+
 .cart-list {
   margin: 0;
   padding: 0;
+}
+
+.card-name {
+  grid-area: name;
+}
+
+.cart-card__color {
+  grid-area: color;
 }
 
 .card-name,
@@ -315,9 +327,52 @@ button {
   margin: 2px;
 }
 
+.counter {
+  user-select: none;
+  display: flex;
+  align-self: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  grid-area: counter;
+}
+.counter button {
+  display: block;
+  width: 36px;
+  height: 36px;
+  background: var(--light-grey);
+  color: #fff;
+  font-size: 25px;
+  cursor: pointer;
+  text-align: center;
+  user-select: none;
+  margin: 10px 5px;
+  padding: 0;
+  border-radius: 5px;
+  transition: 0.2s;
+}
 
+.counter button:hover {
+  background: var(--secondary-color);
+}
 
+.counter button:last-child{
+  background-color: #9C2C13;
+}
 
+.checkout-button {
+  text-decoration: none;
+  background-color: #525b0f;
+  padding: 16px 30%;
+  min-width: 64px;
+  font-size: large;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.checkout-container {
+  width: 100%;
+  text-align: center;
+}
 
 .total {
   display: none;
@@ -347,27 +402,29 @@ section.total p span {
   .mission {
     font-size: 1.2em;
   }
+
+  .cart-card {
+    display: grid;
+    grid-template-areas: 
+      "img name counter" 
+      "img color counter";
+    justify-content: space-between;
+    margin: 10px;
+  }
+  .cart-list img {
+    max-width: 150px;
+  }
+  .checkout-container {
+    text-align: end;
+  }
+  .checkout-button {
+    padding: 16px 160px;
+    min-width: 64px;
+    margin: 20px;
+  }
 }
 
-.counter {
-  user-select: none;
-  display: flex;
-  
-}
-.counter button {
-  display: block;
-  width: 30px;
-  height: 40px;
-  background: var(--light-grey);
-  color: #fff;
-  font-size: 25px;
-  cursor: pointer;
-  text-align: center;
-  text-justify: center;
-  user-select: none;
-  margin: 10px 5px;
-  padding: 5px 0 0 0;
-}
+
 
 
 footer {

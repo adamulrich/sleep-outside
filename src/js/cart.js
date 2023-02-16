@@ -42,9 +42,9 @@ function cartItemTemplate(item) {
             <button id='quantityDown_${item.Id}' data-id='${item.Id}' class='cart-card-quantity-down'>-</button> 
             <p class='cart-card__quantity'> ${item.Quantity}</p>
             <button id='quantityUp_${item.Id}' data-id='${item.Id}' class='cart-card-quantity-up'>+</button> 
-        </div>
-        <p class='cart-card__price'>$${item.FinalPrice}</p>
-        <button id='deleteButton_${item.Id}' data-id='${item.Id}' class='cart-card__delete'>X</button>   
+            <p class='cart-card__price'>$${item.FinalPrice}</p>
+            <button id='deleteButton_${item.Id}' data-id='${item.Id}' class='cart-card__delete'>X</button>  
+        </div> 
     </li>`;
     return newItem;
 }
