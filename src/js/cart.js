@@ -12,7 +12,7 @@ function renderCartContents() {
     let htmlItems = '';
     if (cartItems != null) {
         htmlItems = cartItems.map((item) => cartItemTemplate(item));
-        document.querySelector('.product-list').innerHTML = htmlItems.join('');
+        document.querySelector('.cart-list').innerHTML = htmlItems.join('');
         document.querySelectorAll('.cart-card__delete').forEach(function (item) {
             setClick(`#${item.getAttribute('id')}`, deleteCartItem)
         });
@@ -24,7 +24,7 @@ function renderCartContents() {
         });
 
     } else {
-        document.querySelector('.product-list').innerHTML = '';
+        document.querySelector('.cart-list').innerHTML = '';
     }
 }
 
@@ -34,19 +34,17 @@ function cartItemTemplate(item) {
         <a href='#' class='cart-card__image'>
             <img src='${item.Images.PrimaryLarge}' alt='${item.Name}' />
         </a>
-        <a href='#'>
-            <h2 class='card__name'>${item.Name}</h2>
+        <a class='card-name' href='#'>
+            <h2 >${item.Name}</h2>
         </a>
         <p class='cart-card__color'>${item.Colors[0].ColorName}</p>
-        <div class='cart-details-container'>
-            <div class='counter'>
-                <button id='quantityDown_${item.Id}' data-id='${item.Id}' class='cart-card-quantity-down'>-</button> 
-                <p class='cart-card__quantity'> ${item.Quantity}</p>
-                <button id='quantityUp_${item.Id}' data-id='${item.Id}' class='cart-card-quantity-up'>+</button> 
-            </div>
+        <div class='counter'>
+            <button id='quantityDown_${item.Id}' data-id='${item.Id}' class='cart-card-quantity-down'>-</button> 
+            <p class='cart-card__quantity'> ${item.Quantity}</p>
+            <button id='quantityUp_${item.Id}' data-id='${item.Id}' class='cart-card-quantity-up'>+</button> 
             <p class='cart-card__price'>$${item.FinalPrice}</p>
-            <button id='deleteButton_${item.Id}' data-id='${item.Id}' class='cart-card__delete'>X</button>
-        </div>
+            <button id='deleteButton_${item.Id}' data-id='${item.Id}' class='cart-card__delete'>X</button>  
+        </div> 
     </li>`;
     return newItem;
 }
