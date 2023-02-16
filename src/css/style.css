@@ -432,3 +432,80 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+form fieldset {
+  margin: 2rem 0;
+  border: 1px solid #445BA9;
+  border-radius: 10px;
+  padding: .5rem 2%;
+}
+form legend {
+  color: #445BA9;
+  margin: 0 1rem;
+  padding: 0 .5rem;
+}
+form label.top, form div {
+  display: block;
+  padding-top: 1rem;
+  color: #9C2C13;
+  font-size: .8rem;
+}
+form label.top input, form label.top select {
+  -webkit-appearance: none;
+  display: block;
+  font-size: 1rem;
+  border: solid 1px #999;
+  border-radius: 4px;
+  padding: .75rem;
+  color: #555;
+  width: 100%;
+  max-width: 20rem;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+form label.sbs {
+  display: block;
+  padding: .75rem 0;
+  color: #555;
+}
+form input.submitBtn {
+  border: none;
+  background-color: #9C2C13;
+  color: white;
+  border-radius: 1rem;
+  padding: .75rem 1.5rem;
+  margin: 0 0 2rem 2%;
+  width: 96%;
+  max-width: 20rem;
+}
+form label.top input:required {
+  border-left: red solid 6px;
+}
+form label.top input:required:valid {
+  border-left: green solid 6px;
+}
+
+
+table#order-summary {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  overflow: hidden;
+}
+
+table#order-summary td,
+table#order-summary {
+  border-top: 1px solid #ECF0F1;
+  padding: 10px;
+}
+
+table#order-summary td{
+  border-left: 1px solid #ECF0F1;
+  border-right: 1px solid #ECF0F1;
+}
+
+table#order-summary td:last-child {
+    text-align: right;
+}
+
+    
+    
+  

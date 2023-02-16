@@ -2,13 +2,13 @@ import {
     getLocalStorage,
     setLocalStorage
 } from './utils.mjs';
-import ProductData from './ProductData.mjs';
+import ExternalServices from './ExternalServices.mjs';
 import {
     displaySuperscriptNumber
 } from './main.js';
 
 const category = new URLSearchParams(window.location.search).get('category');
-const dataSource = new ProductData(category);
+const dataSource = new ExternalServices(category);
 
 function addProductToCart(product) {
     let currentCart = getLocalStorage('so-cart');

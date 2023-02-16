@@ -44,11 +44,11 @@ export function displaySuperscriptNumber() {
     }
 }
 function callToRegister() {
-    var num = localStorage.getItem("visits");
+    var num = localStorage.getItem('visits');
     localStorage.setItem('visits', ++num);
     if (num == 1) {
-        let callto = document.getElementById("call-to-register");
-        let msg = document.createElement("h3")
+        let callto = document.getElementById('call-to-register');
+        let msg = document.createElement('h3')
         msg.textContent = 'Welcome to Sleep Outside! Register now to get 30% off your next purchase!'
         callto.appendChild(msg)
     }

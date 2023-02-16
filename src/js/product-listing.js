@@ -1,11 +1,11 @@
-import ProductData from './ProductData.mjs';
+import ExternalServices from './ExternalServices.mjs';
 import gsap from 'gsap';
 const category = new URLSearchParams(window.location.search).get('category');
 document.getElementById('categoryName').innerText = category.charAt(0).toUpperCase() + category.slice(1);
 let productList = [];
 
 async function displayProductCards(productCategory){
-    const dataSource = new ProductData(productCategory);
+    const dataSource = new ExternalServices(productCategory);
     const products = await dataSource.findAllProducts(productCategory);
     productList = products;
     products.map((product) => {

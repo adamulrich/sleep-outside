@@ -1,14 +1,10 @@
 const baseURL = 'http://server-nodejs.cit.byui.edu:3000/';
 
-function convertToJson(res) {
-    if (res.ok) {
-        return res.json();
-    } else {
-        throw new Error('Bad Response');
-    }
+async function convertToJson(res) {
+    return res.json();
 }
 
-export default class ProductData {
+export default class ExternalServices {
     constructor(category) {
         this.category = category;
     }
@@ -24,5 +20,17 @@ export default class ProductData {
     async findAllProducts() {
         const products = await this.getData();
         return products;
+    }
+
+    async checkout(payload) {
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        }
+        return await fetch(baseURL + 'checkout', options).then();
     }
 }
