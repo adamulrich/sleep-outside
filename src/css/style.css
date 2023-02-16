@@ -475,6 +475,13 @@ form input.submitBtn {
   margin: 0 0 2rem 2%;
   width: 96%;
   max-width: 20rem;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+form input.submitBtn:active {
+  transform: scale(0.95);
+
 }
 form label.top input:required {
   border-left: red solid 6px;
