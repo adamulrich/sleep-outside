@@ -1,4 +1,4 @@
-import ProductData from './ProductData.mjs';
+import ProductData from './ExternalServices.mjs';
 import gsap from 'gsap';
 const category = new URLSearchParams(window.location.search).get('category');
 document.getElementById('categoryName').innerText = category.charAt(0).toUpperCase() + category.slice(1);

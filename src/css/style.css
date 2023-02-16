@@ -482,3 +482,30 @@ form label.top input:required {
 form label.top input:required:valid {
   border-left: green solid 6px;
 }
+
+
+table#order-summary {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  overflow: hidden;
+}
+
+table#order-summary td,
+table#order-summary {
+  border-top: 1px solid #ECF0F1;
+  padding: 10px;
+}
+
+table#order-summary td{
+  border-left: 1px solid #ECF0F1;
+  border-right: 1px solid #ECF0F1;
+}
+
+table#order-summary td:last-child {
+    text-align: right;
+}
+
+    
+    
+  

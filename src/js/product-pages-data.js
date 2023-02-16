@@ -1,4 +1,4 @@
-import ProductData from './ProductData.mjs';
+import ProductData from './ExternalServices.mjs';
 const category = new URLSearchParams(window.location.search).get('category');
 const dataSource = new ProductData(category);
 
