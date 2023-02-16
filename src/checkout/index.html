@@ -20,8 +20,32 @@
         <section class="products">
             <h2>Review & Place your Order</h2>
         </section>
+    <form action="thanks.html" method="get">
+            <fieldset>
+                <legend>Shipping</legend>
+                <label class="top">First Name*<input type="text" name="fname" required></label>
+                <label class="top">Last Name*<input type="text" name="lname" required></label>
+                <label class="top">Street*<input type="text" name="street" required></label>
+                <label class="top">City*<input type="text" name="city" required></label>
+                <label class="top">State*<input type="text" name="state" required></label>
+                <label class="top">Zip*<input type="text" name="zip" pattern="\d{5,5}(-\d{4,4})?" required></label>
+            </fieldset>
+            <fieldset>
+                <legend>Payment</legend>
+                <label class="top">Card number*<input type="text" name="card-number" pattern="(\d{4}[-\s]?){3}\d{4}" required></label>
+                <label class="top">Expiration*<input type="text" name="expiration" pattern= "^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$" required></label>
+                <label class="top">Security Code*<input type="text" name="code" pattern="\d{3,4}" required></label>
+            </fieldset>
+            <fieldset id="order-summary">
+                <legend>Order Summary</legend>
+                <input type="text" name="subtotal" hidden>
+                <input type="text" name="shipping" hidden>
+                <input type="text" name="tax" hidden>
+                <input type="text" name="ordertotal" hidden>
+            </fieldset>
+            <input type="submit" value="Checkout" class="submitBtn">
+        </form>
     </main>
-
     <footer id = 'main-footer'></footer>
 </body>
 
