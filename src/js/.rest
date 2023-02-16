@@ -1,0 +1,30 @@
+###
+POST http://server-nodejs.cit.byui.edu:3000/checkout HTTP/1.1
+Content-Type: application/json
+
+{ 
+  "orderDate": "2021-01-27T18:18:26.095Z",
+  "fname": "John",
+  "lname": "Doe",
+  "street": "123 Main",
+  "city": "Rexburg",
+  "state": "ID",
+  "zip": "83440",
+  "cardNumber": "1234123412341234",
+  "expiration": "8/24",
+  "code": "123",
+  "items": [{
+    "id": "20CXG",
+    "name": "The North Face Pivoter 27 L Backpack",
+    "price": 39.99,
+    "quantity": 1
+  }, {
+    "id": "14GVF",
+    "name": "Marmot 5°F Rampart Down Sleeping Bag - 650 Fill, Mummy (For Men and Women)",
+    "price": 229.99,
+    "quantity": 1
+  }],
+  "orderTotal": "298.18",
+  "shipping": 12,
+  "tax": "16.20"
+}

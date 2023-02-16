@@ -7,9 +7,6 @@ import {
 
 import ExternalServices from './ExternalServices.mjs';
 
-
-
-// convert the list of products from localStorage to the simpler form required for the checkout process. Array.map would be perfect for this.
     
 
 export default class CheckoutProcess {
@@ -35,8 +32,9 @@ export default class CheckoutProcess {
         this.displayOrderSummary();
     }
 
-// takes the items currently stored in the cart (localstorage) and returns them in a simplified form.
-    packageItems(items) {
+    // convert the list of products from localStorage to the simpler form required for the checkout process. Array.map would be perfect for this.
+    // takes the items currently stored in the cart (localstorage) and returns them in a simplified form.
+    packageItems() {
         const cartItems = [];
         this.cart.forEach(item => {
             cartItems.push({
@@ -50,10 +48,17 @@ export default class CheckoutProcess {
         return cartItems;
     }
         
-    async checkout(form) {
-        // build the data object from the calculated fields, the items in the cart, and the information entered into the form
-        const dataObject = this.packageItems();
+    async checkout() {
+        // build the data object from the calculated fields, the items in the cart, and the information entered into the form        
         // call the checkout method in our ExternalServices module and send it our data object.
+        const ES = new ExternalServices;
+        const formData = this.createDataFromForm();
+        const response = await ES.checkout(formData);
+        if (response.ok) {
+            const result = await response.text;
+            console.log(result)
+            setLocalStorage('so-cart', [])
+        }
 
     }
 
@@ -76,7 +81,7 @@ export default class CheckoutProcess {
         orderData.shipping = this.shipping;
         orderData.tax = this.tax;
 
-        console.log(orderData);
+        return (orderData);
     }
 
     calculateItemSummary() {
@@ -135,5 +140,5 @@ checkOut.init();
 
 // wire up on submit to clear cart after successful post
 document.getElementById('submit-button').onclick = function () {
-    checkOut.createDataFromForm();
+    checkOut.checkout();
 };

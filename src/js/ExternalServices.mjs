@@ -25,4 +25,23 @@ export default class ExternalServices {
         const products = await this.getData();
         return products;
     }
+
+    async checkout(payload) {
+        
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        }
+        console.log(baseURL + 'checkout');
+        console.log(options);
+        const response = await fetch(baseURL + 'checkout', options);
+        if (response.ok) {
+            const textData = await response.text();
+            console.log(textData);
+            return textData;
+        }
+    }
 }
