@@ -1,6 +1,6 @@
-import ProductData from './ExternalServices.mjs';
+import ExternalServices from './ExternalServices.mjs';
 const category = new URLSearchParams(window.location.search).get('category');
-const dataSource = new ProductData(category);
+const dataSource = new ExternalServices(category);
 
 async function buildDetailsPage() {
     const productId = new URLSearchParams(document.location.search).get(

@@ -8,7 +8,7 @@ function convertToJson(res) {
     }
 }
 
-export default class ProductData {
+export default class ExternalServices {
     constructor(category) {
         this.category = category;
     }
