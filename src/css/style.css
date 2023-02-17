@@ -438,7 +438,7 @@ footer {
   align-items: center;
   flex-flow: row wrap;
   align-content: center;
-
+  width: 200px;
 }
 .radio-color {
   width: auto;
@@ -458,5 +458,6 @@ footer {
 #div-color-radio-buttons {
   display: flex;
   flex-flow: row wrap;
-
+  justify-content: flex-start;
+  gap: 10px;
 }
