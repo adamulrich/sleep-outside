@@ -268,7 +268,7 @@ button {
 
 .product-detail {
   padding: 1em;
-  max-width: 500px;
+  max-width: 700px;
   margin: auto;
 }
 
@@ -446,6 +446,7 @@ footer {
 }
 .div-radio-color label {
   align-self: center;
+  
 }
 .swatch {
   border-radius: 10px;
@@ -458,6 +459,6 @@ footer {
 #div-color-radio-buttons {
   display: flex;
   flex-flow: row wrap;
-  justify-content: flex-start;
-  gap: 10px;
+  justify-content: start;
+  gap: 20px;
 }
