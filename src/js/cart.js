@@ -12,7 +12,7 @@ function renderCartContents() {
     let htmlItems = '';
     if (cartItems != null) {
         htmlItems = cartItems.map((item) => cartItemTemplate(item));
-        document.querySelector('.product-list').innerHTML = htmlItems.join('');
+        document.querySelector('.cart-list').innerHTML = htmlItems.join('');
         document.querySelectorAll('.cart-card__delete').forEach(function (item) {
             setClick(`#${item.id}`, deleteCartItem)
         });
@@ -24,7 +24,7 @@ function renderCartContents() {
         });
 
     } else {
-        document.querySelector('.product-list').innerHTML = '';
+        document.querySelector('.cart-list').innerHTML = '';
     }
 }
 
@@ -34,8 +34,8 @@ function cartItemTemplate(item) {
         <a href='#' class='cart-card__image'>
             <img src='${item.Image}' alt='${item.Name}' />
         </a>
-        <a href='#'>
-            <h2 class='card__name'>${item.Name}</h2>
+        <a class='card-name' href='#'>
+            <h2 >${item.Name}</h2>
         </a>
         <p class='cart-card__color'>${item.ColorName}</p>
         <div class='cart-details-container'>

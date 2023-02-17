@@ -3,7 +3,7 @@ import {
     setLocalStorage, 
     makeHash
 } from './utils.mjs';
-import ProductData from './ProductData.mjs';
+import ExternalServices from './ExternalServices.mjs';
 import {
     displaySuperscriptNumber
 } from './main.js';
@@ -11,7 +11,7 @@ import {
 
 
 const category = new URLSearchParams(window.location.search).get('category');
-const dataSource = new ProductData(category);
+const dataSource = new ExternalServices(category);
 
 
 function animateCart() {
