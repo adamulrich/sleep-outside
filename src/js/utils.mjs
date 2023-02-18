@@ -62,3 +62,7 @@ export async function loadTemplate(filePath) {
         return textData;
     }
 }
+
+export function makeHash(product, colorCode) {
+    return `${product.Id}-${colorCode}`
+}

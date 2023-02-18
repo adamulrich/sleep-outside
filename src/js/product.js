@@ -1,35 +1,18 @@
 import {
     getLocalStorage,
-    setLocalStorage
+    setLocalStorage, 
+    makeHash
 } from './utils.mjs';
 import ExternalServices from './ExternalServices.mjs';
 import {
     displaySuperscriptNumber
 } from './main.js';
 
+
+
 const category = new URLSearchParams(window.location.search).get('category');
 const dataSource = new ExternalServices(category);
 
-function addProductToCart(product) {
-    let currentCart = getLocalStorage('so-cart');
-    let added = false;
-    if (currentCart != null) {
-        for (let i = 0; i < currentCart.length; i++) {
-            if (product.Id == currentCart[i].Id) {
-                product.Quantity = currentCart[i].Quantity + 1;
-                currentCart.splice(i, 1, product);
-                added = true;
-            }
-        }
-        if (added == false) {
-            currentCart.push(product);
-        }
-    } else {
-        currentCart = [product];
-    }
-    setLocalStorage('so-cart', currentCart);
-    displaySuperscriptNumber();
-}
 
 function animateCart() {
     let cart = document.querySelector('.cart');
@@ -43,9 +26,46 @@ function animateCart() {
 async function addToCartHandler(e) {
     const product = await dataSource.findProductById(e.target.dataset.id);
     product.Quantity = 1;
-    addProductToCart(product);
+    // get color code and colorName
+    const colorCode = document.querySelector('input[name="color-selector"]:checked').id;
+    const colorName = document.querySelector('input[name="color-selector"]:checked').getAttribute('data-id');
+    addProductToCart(product, colorCode, colorName);
     animateCart();
 }
+
+function addProductToCart(product, colorCode, colorName) {
+    let currentCart = getLocalStorage('so-cart');
+    let added = false;
+    // reduce what's in the cart object to product code, color code, quantity, correct color thumbnail, brand, name, color name
+    const cartProduct = {
+        Hash: makeHash(product, colorCode, colorName),
+        Id: product.Id,
+        Name: product.Name,
+        Image: product.Images.PrimaryLarge,
+        ColorCode: colorCode,
+        ColorName: colorName,
+        FinalPrice: product.FinalPrice,
+        Quantity: 1
+    }
+
+    if (currentCart != null) {
+        for (let i = 0; i < currentCart.length; i++) {
+            if (cartProduct.Hash == currentCart[i].Hash) {
+                cartProduct.Quantity = currentCart[i].Quantity + 1;
+                currentCart.splice(i, 1, cartProduct);
+                added = true;
+            }
+        }
+        if (added == false) {
+            currentCart.push(cartProduct);
+        }
+    } else {
+        currentCart = [cartProduct];
+    }
+    setLocalStorage('so-cart', currentCart);
+    displaySuperscriptNumber();
+}
+
 
 // add listener to Add to Cart button
 document

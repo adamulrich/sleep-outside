@@ -103,6 +103,7 @@ button {
   border: 0;
   font-size: var(--large-font);
   cursor: pointer;
+  border-radius: 5px;
 }
 .btn-group p{
   margin:auto
@@ -267,7 +268,7 @@ button {
 
 .product-detail {
   padding: 1em;
-  max-width: 500px;
+  max-width: 700px;
   margin: auto;
 }
 
@@ -488,7 +489,35 @@ form label.top input:required {
 form label.top input:required:valid {
   border-left: green solid 6px;
 }
+.div-radio-color {
+  display: flex;
+  align-items: center;
+  flex-flow: row wrap;
+  align-content: center;
+  width: 280px;
+}
+.radio-color {
+  width: auto;
+  height: auto;
+}
+.div-radio-color label {
+  align-self: center;
+  
+}
+.swatch {
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px #303030;
+  width: 50px;
+  max-height: 50px;
+  max-width: 80px;
+}
 
+#div-color-radio-buttons {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: start;
+  gap: 20px;
+}
 
 table#order-summary {
   width: 100%;
@@ -511,7 +540,3 @@ table#order-summary td{
 table#order-summary td:last-child {
     text-align: right;
 }
-
-    
-    
-  

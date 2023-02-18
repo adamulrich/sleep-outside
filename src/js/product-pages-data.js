@@ -10,8 +10,31 @@ async function buildDetailsPage() {
     document.getElementById('addToCart').setAttribute('data-id', productId);
     document.getElementById('product-descriptionhtmlsimple').innerHTML =
         product.DescriptionHtmlSimple;
-    document.getElementById('product-color-name').innerText =
-        product.Colors[0].ColorName;
+
+    // handle colors
+    let template = '';
+    let selectFlag = true;
+    let selected = 'checked';
+    product.Colors.forEach(color => {
+
+        // this should set the first item to selected
+        if (selectFlag) {
+            selectFlag = false
+        } else {
+            selected = '';
+        }
+        template += 
+        `<div class="div-radio-color">
+            <input type="radio" name="color-selector" data-id="${color.ColorName}" ${selected} id="${color.ColorCode}" class="radio-color">
+            <label for="${color.ColorCode}">${color.ColorName}<img class="swatch" src="${color.ColorChipImageSrc}" alt="swatch for color ${color.ColorName}"></label>
+            
+        </div>
+        `
+    });
+    document.getElementById('div-color-radio-buttons').innerHTML = template;
+    document.getElementById('div-color-radio-buttons').firstChild
+    // document.getElementById('product-color-name').innerText =
+    //     product.Colors[0].ColorName;
     document.getElementById(
         'product-suggested-retail-price'
     ).innerText = `$${product.SuggestedRetailPrice}`;

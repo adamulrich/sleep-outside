@@ -9,13 +9,11 @@ Content-Type: application/json
 "city":"Auburn","state":"WA","zip":"98092","cardNumber":"1234123412341234","expiration":"11/22","code":"111","orderDate":1676531131094,"items":[{"id":"15UGY","name":"Wenzel 5-Person Tent - 10x8’, 3-Season","price":69,"quantity":4},{"id":"880RT","name":"Marmot Ajax Tent - 2-Person, 3-Season","price":179.99,"quantity":2}],"orderTotal":694.14,"shipping":20,"tax":38.16}
 
 
+POST http://server-nodejs.cit.byui.edu:3000/checkout HTTP/1.1
+Content-Type: application/json
 
-
-
-###
-
-//{ 
-  "orderDate": "2021-01-27T18:18:26.095Z",
+{ 
+  "orderDate": "2023-02-16T18:18:26.095Z",
   "fname": "John",
   "lname": "Doe",
   "street": "123 Main",
