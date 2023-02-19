@@ -12,6 +12,8 @@ async function displayProductCards(productCategory){
         const li = document.createElement('li');
         li.setAttribute('class', 'product-card');
         li.setAttribute('id', `product-${product.Id}`);
+        const productCardDiv = document.createElement('div');
+        productCardDiv.setAttribute('id', 'productCardDiv');
         const a = document.createElement('a');
         a.setAttribute('href', `../product_pages/index.html?productId=${product.Id}&category=${productCategory}`)
         const img = document.createElement('img');
@@ -37,29 +39,18 @@ async function displayProductCards(productCategory){
             ((product.SuggestedRetailPrice - product.FinalPrice) /
           product.SuggestedRetailPrice) * 100
         ).toFixed(0)}% off`;
+        const btndiv = document.createElement('div');
+        btndiv.setAttribute('id', 'btndiv');
+        btndiv.setAttribute('data-image', product.Images.PrimaryExtraLarge);
+        btndiv.setAttribute('data-description', product.DescriptionHtmlSimple);
+        btndiv.setAttribute('data-name', product.Name);
         const quickView = document.createElement('button');
-        quickView.textContent = 'Quick View'
+        quickView.textContent = 'Quick View';
         quickView.setAttribute('id','quick-view');
-        const modalContent = document.createElement('div');
-        modalContent.setAttribute('class', 'quick-content');
-        modalContent.setAttribute('id', `quick-${product.Id}`)
-        const close = document.createElement('span');
-        close.setAttribute('class', 'close');
-        close.textContent = 'X';
-        const modalImg = document.createElement('img');
-        modalImg.setAttribute('src', product.Images.PrimaryExtraLarge);
-        modalImg.setAttribute('alt', `Image of ${product.Name}`);
-        const quickText = document.createElement('p');
-        quickText.setAttribute('id', 'quick-text');
-        quickText.innerHTML = product.DescriptionHtmlSimple;
+        
 
-
-        const modal = document.getElementById('quick-modal')
-        modal.appendChild(modalContent);
-        modalContent.appendChild(close);
-        modalContent.appendChild(modalImg);
-        modalContent.appendChild(quickText);
-        li.appendChild(a);
+        li.appendChild(productCardDiv);
+        productCardDiv.appendChild(a);
         a.appendChild(img);
         a.appendChild(h3);
         a.appendChild(h2);
@@ -67,26 +58,31 @@ async function displayProductCards(productCategory){
         p.appendChild(suggestedRetailPrice)
         p.appendChild(listedPrice)
         p.appendChild(percentOff)
-        li.appendChild(quickView)
+        li.appendChild(btndiv)
+        btndiv.appendChild(quickView)
 
         document.querySelector('.product-list').appendChild(li);
 
+        const modal = document.getElementById('quick-modal')
+
         quickView.onclick = function(){
-            if (modalContent.id == `quick-${product.Id}`){
-                modalContent.style.display = 'block'
-                modal.style.display = 'block';
-            }
+            const modalImg = document.getElementById('modal-img');
+            modalImg.src = btndiv.getAttribute('data-image');
+            modalImg.alt = btndiv.getAttribute('data-name');
+            document.getElementById('quick-name').innerText = btndiv.getAttribute('data-name');
+            document.getElementById('quick-text').innerHTML = btndiv.getAttribute('data-description');
+            modal.style.display = 'block'
+
             
         }
+        const close = document.querySelector('.close')
         close.onclick = function(){
             modal.style.display = 'none'
-            modalContent.style.display = 'none'
 
         }
         window.onclick = function(event){
             if (event.target == modal){
                 modal.style.display = 'none'
-                modalContent.style.display = 'none'
             }
         }
 

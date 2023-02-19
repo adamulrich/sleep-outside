@@ -243,7 +243,10 @@ button {
 
 /* Styles for product lists */
 .product-card {
+  display: flex;
+  flex-flow: column nowrap;
   flex: 1 1 45%;
+  justify-content: space-between;
   margin: 0.25em;
   padding: 0.5em;
   border: 1px solid var(--light-grey);
@@ -558,20 +561,24 @@ table#order-summary td:last-child {
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
+#quick-name{
+  font-weight: bolder;
+}
+
 /* Modal Content */
-.quick-content {
-  display: none;
+.modal-content {
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 50%;
+  width: 40%;
+  text-align: center;
 }
-.quick-content img{
+.modal-content img{
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 75%;
+  width: 60%;
 }
 
 /* The Close Button */
