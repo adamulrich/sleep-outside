@@ -37,8 +37,28 @@ async function displayProductCards(productCategory){
             ((product.SuggestedRetailPrice - product.FinalPrice) /
           product.SuggestedRetailPrice) * 100
         ).toFixed(0)}% off`;
+        const quickView = document.createElement('button');
+        quickView.textContent = 'Quick View'
+        quickView.setAttribute('id','quick-view');
+        const modalContent = document.createElement('div');
+        modalContent.setAttribute('class', 'quick-content');
+        modalContent.setAttribute('id', `quick-${product.Id}`)
+        const close = document.createElement('span');
+        close.setAttribute('class', 'close');
+        close.textContent = 'X';
+        const modalImg = document.createElement('img');
+        modalImg.setAttribute('src', product.Images.PrimaryExtraLarge);
+        modalImg.setAttribute('alt', `Image of ${product.Name}`);
+        const quickText = document.createElement('p');
+        quickText.setAttribute('id', 'quick-text');
+        quickText.innerHTML = product.DescriptionHtmlSimple;
 
 
+        const modal = document.getElementById('quick-modal')
+        modal.appendChild(modalContent);
+        modalContent.appendChild(close);
+        modalContent.appendChild(modalImg);
+        modalContent.appendChild(quickText);
         li.appendChild(a);
         a.appendChild(img);
         a.appendChild(h3);
@@ -47,7 +67,29 @@ async function displayProductCards(productCategory){
         p.appendChild(suggestedRetailPrice)
         p.appendChild(listedPrice)
         p.appendChild(percentOff)
+        li.appendChild(quickView)
+
         document.querySelector('.product-list').appendChild(li);
+
+        quickView.onclick = function(){
+            if (modalContent.id == `quick-${product.Id}`){
+                modalContent.style.display = 'block'
+                modal.style.display = 'block';
+            }
+            
+        }
+        close.onclick = function(){
+            modal.style.display = 'none'
+            modalContent.style.display = 'none'
+
+        }
+        window.onclick = function(event){
+            if (event.target == modal){
+                modal.style.display = 'none'
+                modalContent.style.display = 'none'
+            }
+        }
+
     });
 }
 displayProductCards(category);
@@ -149,7 +191,5 @@ input.addEventListener('keypress', (function(event){
 }));
 
 input.addEventListener('search',productSearch);
-   
-
 document.getElementById('sort-price').onclick = function() { layout(orderProductCardsPrice, productList)};
 document.getElementById('sort-name').onclick = function () { layout(orderProductCardsName, productList) };
