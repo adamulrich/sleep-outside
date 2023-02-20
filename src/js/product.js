@@ -29,11 +29,12 @@ async function addToCartHandler(e) {
     // get color code and colorName
     const colorCode = document.querySelector('input[name="color-selector"]:checked').id;
     const colorName = document.querySelector('input[name="color-selector"]:checked').getAttribute('data-id');
-    addProductToCart(product, colorCode, colorName);
+    const colorPicture = document.querySelector('input[name="color-selector"]:checked').getAttribute('data-picture');
+    addProductToCart(product, colorCode, colorName, colorPicture);
     animateCart();
 }
 
-function addProductToCart(product, colorCode, colorName) {
+function addProductToCart(product, colorCode, colorName, colorPicture) {
     let currentCart = getLocalStorage('so-cart');
     let added = false;
     // reduce what's in the cart object to product code, color code, quantity, correct color thumbnail, brand, name, color name
@@ -41,7 +42,7 @@ function addProductToCart(product, colorCode, colorName) {
         Hash: makeHash(product, colorCode, colorName),
         Id: product.Id,
         Name: product.Name,
-        Image: product.Images.PrimaryLarge,
+        Image: colorPicture,
         ColorCode: colorCode,
         ColorName: colorName,
         FinalPrice: product.FinalPrice,
