@@ -1,15 +1,19 @@
 import ExternalServices from './ExternalServices.mjs';
+import { createCrumbBar } from './breadcrumbBar.js';
+
 const category = new URLSearchParams(window.location.search).get('category');
 const dataSource = new ExternalServices(category);
 
 async function buildDetailsPage() {
-    const productId = new URLSearchParams(document.location.search).get(
-        'productId'
-    );
+    const productId = new URLSearchParams(document.location.search).get('productId');
+
     const product = await dataSource.findProductById(productId);
     document.getElementById('addToCart').setAttribute('data-id', productId);
     document.getElementById('product-descriptionhtmlsimple').innerHTML =
         product.DescriptionHtmlSimple;
+
+    // set breadcrumb-bar 
+    createCrumbBar(product.Name);
 
     // handle colors
     let template = '';

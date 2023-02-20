@@ -1,5 +1,9 @@
 import ExternalServices from './ExternalServices.mjs';
 import gsap from 'gsap';
+import { createCrumbBar } from './breadcrumbBar.js';
+import { setLocalStorage } from './utils.mjs';
+
+
 const category = new URLSearchParams(window.location.search).get('category');
 document.getElementById('categoryName').innerText = category.charAt(0).toUpperCase() + category.slice(1);
 let productList = [];
@@ -8,6 +12,12 @@ async function displayProductCards(productCategory){
     const dataSource = new ExternalServices(productCategory);
     const products = await dataSource.findAllProducts(productCategory);
     productList = products;
+    
+    // set up localstorage with values
+    setLocalStorage('currentCategoryCount',productList.length);
+    setLocalStorage('currentCategory',productCategory);
+    createCrumbBar();
+
     products.map((product) => {
         const li = document.createElement('li');
         li.setAttribute('class', 'product-card');
