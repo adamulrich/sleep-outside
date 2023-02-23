@@ -8,6 +8,9 @@ import {
 
 import ExternalServices from './ExternalServices.mjs';
 
+import Alert, { displayCategoryAlerts, removeAlerts } from './alerts.js';
+import { displayAlerts } from './alerts.js';
+
 const orderSummaryHeader = document.getElementById('order-summary');    
 
 export default class CheckoutProcess {
@@ -64,6 +67,7 @@ export default class CheckoutProcess {
                 //clear cart
                 setLocalStorage('so-cart', []);
                 displaySuperscriptNumber();
+                displayCategoryAlerts('checkout');
 
                 // clear form
                 document.getElementById('section-header')
@@ -71,12 +75,22 @@ export default class CheckoutProcess {
                 document.getElementById('checkout-form').innerHTML = `<a href="../index.html">Return to Home Page</a>`;
             } else {
                 message = await response.json().then();
+                console.log(message);
+                Object.values(message).forEach(item => {
+                    let alert = new Alert({message: item, background: 'yellow', color: 'black', category: 'checkout'});
+                    alert.saveToLocalStorage();
+                })
+                displayCategoryAlerts('checkout')
+                removeAlerts('checkout');
+                
                 console.log(`response: ${response.status}`);
                 console.log(message);
+                console.log('test1')
             }
         } catch (error) {
             console.log(error)
             console.log('response:' + response);
+            console.log('test2')
         }
 
     }
@@ -159,6 +173,12 @@ checkOut.init();
 
 
 // wire up on submit to clear cart after successful post
-document.getElementById('submit-button').onclick = function () {
-    checkOut.checkout();
-};
+document.getElementById('submit-button').addEventListener('click', function() {
+    const myForm = document.forms[0];
+    // const valid = myForm.checkValidity(); 
+    // myForm.reportValidity();
+    // if (valid) {
+        checkOut.checkout();
+    // }
+    
+});
