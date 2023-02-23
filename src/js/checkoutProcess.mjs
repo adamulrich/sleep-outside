@@ -8,7 +8,7 @@ import {
 
 import ExternalServices from './ExternalServices.mjs';
 
-import Alert from './alerts.js';
+import Alert, { displayCategoryAlerts, removeAlerts } from './alerts.js';
 import { displayAlerts } from './alerts.js';
 
 const orderSummaryHeader = document.getElementById('order-summary');    
@@ -67,6 +67,7 @@ export default class CheckoutProcess {
                 //clear cart
                 setLocalStorage('so-cart', []);
                 displaySuperscriptNumber();
+                displayCategoryAlerts('checkout');
 
                 // clear form
                 document.getElementById('section-header')
@@ -79,7 +80,8 @@ export default class CheckoutProcess {
                     let alert = new Alert({message: item, background: 'yellow', color: 'black', category: 'checkout'});
                     alert.saveToLocalStorage();
                 })
-                displayAlerts('checkout')
+                displayCategoryAlerts('checkout')
+                removeAlerts('checkout');
                 
                 console.log(`response: ${response.status}`);
                 console.log(message);
@@ -173,10 +175,10 @@ checkOut.init();
 // wire up on submit to clear cart after successful post
 document.getElementById('submit-button').addEventListener('click', function() {
     const myForm = document.forms[0];
-    const valid = myForm.checkValidity(); 
-    myForm.reportValidity();
-    if (valid) {
+    // const valid = myForm.checkValidity(); 
+    // myForm.reportValidity();
+    // if (valid) {
         checkOut.checkout();
-    }
+    // }
     
 });
