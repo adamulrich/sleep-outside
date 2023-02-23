@@ -595,3 +595,20 @@ table#order-summary td:last-child {
   text-decoration: none;
   cursor: pointer;
 }
+
+.breadcrumb-bar {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.breadcrumb-bar div {
+  background-color: var(--secondary-color);  
+  margin: 10px 5px;
+  padding: 10px 20px;
+  border-radius: 1em;
+}
+
+.breadcrumb-bar div a {
+  color: #fff;
+  
+}
