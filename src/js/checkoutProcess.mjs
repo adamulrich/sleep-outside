@@ -73,10 +73,12 @@ export default class CheckoutProcess {
                 message = await response.json().then();
                 console.log(`response: ${response.status}`);
                 console.log(message);
+                console.log('test1')
             }
         } catch (error) {
             console.log(error)
             console.log('response:' + response);
+            console.log('test2')
         }
 
     }
@@ -159,6 +161,12 @@ checkOut.init();
 
 
 // wire up on submit to clear cart after successful post
-document.getElementById('submit-button').onclick = function () {
-    checkOut.checkout();
-};
+document.getElementById('submit-button').addEventListener('click', function() {
+    const myForm = document.forms[0];
+    const valid = myForm.checkValidity(); 
+    myForm.reportValidity();
+    if (valid) {
+        checkOut.checkout();
+    }
+    
+});

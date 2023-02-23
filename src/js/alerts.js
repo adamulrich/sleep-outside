@@ -13,6 +13,11 @@ export default class Alert{
         this.color = alert.color;
         
     }
+    saveToFile(){
+        const path = `../json/alerts.json`;
+        const alertJson = await getData(path);
+        alertJson.push();
+    }
 }
 
 async function getData(path) {
