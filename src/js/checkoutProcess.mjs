@@ -9,12 +9,10 @@ import {
 import ExternalServices from './ExternalServices.mjs';
 
 import Alert, { displayCategoryAlerts, removeAlerts } from './alerts.js';
-import { displayAlerts } from './alerts.js';
 
 const orderSummaryHeader = document.getElementById('order-summary');    
 
 export default class CheckoutProcess {
-
 
     constructor(key, outputSelector) {
         this.key = key;
@@ -26,12 +24,10 @@ export default class CheckoutProcess {
         this.tax = 0;
         this.orderTotal = 0;
         this.taxRate = .06;
-
     }
 
     init() {
         this.cart = getLocalStorage(this.key);
-        console.log(this.cart);
         this.calculateItemSummary();
         this.displayOrderSummary();
     }
@@ -46,8 +42,7 @@ export default class CheckoutProcess {
                 name: item.Name,
                 price: item.FinalPrice,
                 quantity: item.Quantity
-            })
-        
+            })     
         });
         return cartItems;
     }
@@ -63,7 +58,6 @@ export default class CheckoutProcess {
             response =  await ES.checkout(formData);            
             if (response.status == 200) {
                 message = await response.json().then();
-                console.log(message);
                 //clear cart
                 setLocalStorage('so-cart', []);
                 displaySuperscriptNumber();
@@ -83,19 +77,12 @@ export default class CheckoutProcess {
                 displayCategoryAlerts('checkout')
                 removeAlerts('checkout');
                 
-                console.log(`response: ${response.status}`);
-                console.log(message);
-                console.log('test1')
             }
         } catch (error) {
             console.log(error)
-            console.log('response:' + response);
-            console.log('test2')
         }
 
     }
-
-    
 
     createDataFromForm() {
         const orderData = {};
@@ -146,7 +133,6 @@ export default class CheckoutProcess {
     displayOrderSummary() {
     
         // add order subtotal to html element and place in hidden input
-    
         document.getElementById('subtotal').innerText = this.itemTotal;
         orderSummaryHeader.innerHTML += (this.itemSummaryTemplate(`item subtotal (${this.itemCount})`, `$ ${this.itemTotal}`));
     
@@ -161,24 +147,21 @@ export default class CheckoutProcess {
         // add the total to the html element and place in hidden input
         document.getElementById('order-total').innerText = this.orderTotal;
         orderSummaryHeader.innerHTML += (this.itemSummaryTemplate(`order total`, `$ ${this.orderTotal}`));
-    
     }
   
 
 }
 
-
 const checkOut = new CheckoutProcess('so-cart', null);
 checkOut.init();
-
 
 // wire up on submit to clear cart after successful post
 document.getElementById('submit-button').addEventListener('click', function() {
     const myForm = document.forms[0];
-    // const valid = myForm.checkValidity(); 
-    // myForm.reportValidity();
-    // if (valid) {
+    const valid = myForm.checkValidity(); 
+    myForm.reportValidity();
+    if (valid) {
         checkOut.checkout();
-    // }
+    }
     
 });

@@ -16,9 +16,9 @@ export default class Alert{
         this.message = alert.message;
         this.background = alert.background;
         this.color = alert.color;
-        this.category = alert.category;
-        
+        this.category = alert.category;        
     }
+
     async saveToLocalStorage(){
         let alertJson = getLocalStorage('alerts');
         if(alertJson != null){
@@ -36,7 +36,6 @@ async function getData(path) {
         .then(convertToJson)
         .then((data) => data);
 }
-
 
 export async function displayAlerts(category = '') {
 
@@ -67,7 +66,6 @@ export async function displayAlerts(category = '') {
     }
 }
 
-
 export function displayCategoryAlerts(category = '') {
 
     let alertJson = getLocalStorage('alerts');
@@ -75,7 +73,6 @@ export function displayCategoryAlerts(category = '') {
     const alertSection = document.querySelector('.alert-list');
     alertSection.innerHTML = '';
 
-    
     // create an alert object for each item in the json, add them to an array
     const alerts = [];
     if (alertJson != null) {
