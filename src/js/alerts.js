@@ -1,3 +1,8 @@
+import {
+    getLocalStorage,
+    setLocalStorage,
+} from './utils.mjs';
+
 function convertToJson(res) {
     if (res.ok) {
         return res.json();
@@ -11,12 +16,18 @@ export default class Alert{
         this.message = alert.message;
         this.background = alert.background;
         this.color = alert.color;
+        this.category = alert.category;
         
     }
-    saveToFile(){
-        const path = `../json/alerts.json`;
-        const alertJson = await getData(path);
-        alertJson.push();
+    async saveToLocalStorage(){
+        let alertJson = getLocalStorage('alerts');
+        if(alertJson != null){
+            alertJson.push({message:this.message, background:this.background, color: this.color, category: this.category});
+        }
+        else{
+            alertJson = [{message:this.message, background:this.background, color: this.color, category: this.category}];
+        }
+        setLocalStorage('alerts', alertJson);
     }
 }
 
@@ -27,7 +38,7 @@ async function getData(path) {
 }
 
 
-async function displayAlerts() {
+export async function displayAlerts(category = '') {
 
     //get alert json
     const path = `../json/alerts.json`;
@@ -37,7 +48,9 @@ async function displayAlerts() {
     const alerts = [];
     alertJson.forEach(element => {
         const tempAlert = new Alert(element);
-        alerts.push(tempAlert)
+        if(category != '' && category == tempAlert.category){
+            alerts.push(tempAlert)
+        }
     });
 
     // get the section for alerts

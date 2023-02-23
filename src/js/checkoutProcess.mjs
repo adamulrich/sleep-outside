@@ -8,6 +8,9 @@ import {
 
 import ExternalServices from './ExternalServices.mjs';
 
+import Alert from './alerts.js';
+import { displayAlerts } from './alerts.js';
+
 const orderSummaryHeader = document.getElementById('order-summary');    
 
 export default class CheckoutProcess {
@@ -71,6 +74,13 @@ export default class CheckoutProcess {
                 document.getElementById('checkout-form').innerHTML = `<a href="../index.html">Return to Home Page</a>`;
             } else {
                 message = await response.json().then();
+                console.log(message);
+                Object.values(message).forEach(item => {
+                    let alert = new Alert({message: item, background: 'yellow', color: 'black', category: 'checkout'});
+                    alert.saveToLocalStorage();
+                })
+                displayAlerts('checkout')
+                
                 console.log(`response: ${response.status}`);
                 console.log(message);
                 console.log('test1')
