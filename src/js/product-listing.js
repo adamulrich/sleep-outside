@@ -177,14 +177,14 @@ function layout(sortFunction, products) {
     }
 }
 function productSearch() {
-    let searchInput = document.getElementById('search-input').value
+    let searchInput = document.getElementById('search-input').value;
     //loop through all elements
     productList.forEach((product) => {
-        let id = 'product-' + product.Id
+        let id = 'product-' + product.Id;
         document.getElementById(id).classList.remove('hide');
-        //check if text includes the search value
+        //check if text does not include the search value
         if (!product.Name.toUpperCase().includes(searchInput.toUpperCase())) {
-            //display matching card
+            //remove cards that do not have search input
             document.getElementById(id).classList.add('hide');
         } 
     });

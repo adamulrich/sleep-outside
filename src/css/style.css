@@ -191,7 +191,7 @@ button,
   border-radius: 200px;
 }
 
-.is-empty, .hide {
+.is-empty, .hide.product-card {
   display: none;
 }
 
