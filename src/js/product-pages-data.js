@@ -1,5 +1,6 @@
 import ExternalServices from './ExternalServices.mjs';
 import { createCrumbBar } from './breadcrumbBar.js';
+import imageCarousel from './image-carousel.js'
 
 const category = new URLSearchParams(window.location.search).get('category');
 const dataSource = new ExternalServices(category);
@@ -16,6 +17,7 @@ async function buildDetailsPage() {
     createCrumbBar(product.Name);
 
     // handle colors
+    let imgTemplate = '';
     let template = '';
     let selectFlag = true;
     let selected = 'checked';
@@ -42,9 +44,19 @@ async function buildDetailsPage() {
     document.getElementById(
         'product-suggested-retail-price'
     ).innerText = `$${product.SuggestedRetailPrice}`;
-    document.getElementById('product-image').src = product.Images.PrimaryExtraLarge;
-    document.getElementById('product-image').alt = product.Name;
-    document.getElementById('product-name-without-brand').innerText =
+    // document.getElementById('product-image').src = product.Images.PrimaryExtraLarge;
+    // document.getElementById('product-image').alt = product.Name;
+    let imgCarCont = document.getElementById('product-image');
+    let img =  document.createElement('img');
+    img.src = product.Images.PrimaryExtraLarge;
+    img.alt = product.Name;
+    imgCarCont.appendChild(img)
+    product.Colors.forEach(color => {
+        imgTemplate += 
+        `<img src='${color.ColorPreviewImageSrc}' alt='${color.ColorName} ${product.Name}'>`
+    }); 
+    imgCarCont.innerHTML = imgTemplate
+    document.getElementById('product-name-without-brand').textContent =
         product.NameWithoutBrand;
     document.getElementById('product-brand-name').innerText = product.Brand.Name;
     document.title = 'Sleep Outside | ' + product.Name;
@@ -55,5 +67,12 @@ async function buildDetailsPage() {
         ((product.SuggestedRetailPrice - product.FinalPrice) /
       product.SuggestedRetailPrice) * 100
     ).toFixed(0)}% off`;
+    let children = document.getElementById('product-image').childElementCount;
+    if (children >= 3){
+        const carousel = new imageCarousel('#product-image');
+    } else {
+        imgCarCont.style.display = 'flex';
+    }
+    
 }
 buildDetailsPage();
