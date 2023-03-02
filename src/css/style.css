@@ -260,6 +260,17 @@ button,
   margin: 0.5em 0;
 }
 
+#product-image {
+  height: 345px;
+  margin: 0 0 50px;
+  width: auto;
+}
+
+#product-image img {
+  width: 60%;
+  margin: auto;
+}
+
 .card__brand {
   font-size: var(--small-font);
 }
@@ -279,6 +290,7 @@ button,
 .product-detail img {
   width: 100%;
 }
+
 
 #product-suggested-retail-price {
   text-decoration: line-through red;

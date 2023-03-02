@@ -35,6 +35,7 @@
   "dependencies": {
     "beautify": "^0.0.8",
     "gsap": "^3.11.4",
+    "images-carousel": "^1.0.2",
     "js-beautify": "^1.14.7",
     "nodemon": "^2.0.20"
   }
