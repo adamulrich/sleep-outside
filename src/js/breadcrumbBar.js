@@ -1,6 +1,5 @@
 import { getLocalStorage } from './utils.mjs';
 
-
 export function createCrumbBar(productName = null) {
     // determine what page we are on.
     const folder = location.href.split('/').slice(-2)[0]; 

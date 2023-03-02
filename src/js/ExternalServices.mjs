@@ -44,6 +44,57 @@ export default class ExternalServices {
             throw { name: 'servicesError', message: JSON.stringify(res) };
         };
         return res;
+    }
 
-    };
+    async loginRequest(creds) {
+        let res = {};
+        let token = '';
+        let result = '';
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(creds)
+        }
+        try {
+            res = await fetch(baseURL + 'login', options).then();
+            if (res.ok) {
+                result = await res.json();
+                token = result.accessToken;
+            } else {
+                // bad login -display alert
+            }
+            // token = await res.body().then();
+        } catch (error) {
+            throw { name: 'servicesError', message: JSON.stringify(res) };
+        };
+        return token;
+    
+    }
+
+    async getOrders(token) {
+        let res = {};
+        let result = '';
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        }
+        try {
+            res = await fetch(baseURL + 'orders', options).then();
+            if (res.ok) {
+                result = await res.json();
+            } else {
+                // bad login -display alert
+            }
+    
+        } catch (error) {
+            throw { name: 'servicesError', message: JSON.stringify(res) };
+        };
+        return result;
+
+    }
 }
