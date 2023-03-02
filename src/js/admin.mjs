@@ -1,4 +1,5 @@
-import ExternalServices from "./ExternalServices.mjs";
+import ExternalServices from './ExternalServices.mjs';
+import Alert from './alerts.js';
 
 class Admin {
     constructor(outputSelector) {
@@ -12,11 +13,16 @@ class Admin {
         // there could be many different things the user wants to do after logging in...
         // this allows us that flexibility without having to write a bunch of login methods
         try {
+            console.log('got here');
             this.token = await this.services.loginRequest(creds);
-            next();
+            if (this.token != '') {
+            
+                next();
+            }
+            
         } catch (err) {
             // remember this from before?
-            alertMessage(err.message.message);
+            // new Alert(err.message.message);
         }
     }
     showLogin() {
@@ -31,10 +37,25 @@ class Admin {
         this.mainElement.innerHTML = innerHTML;
         document
             .getElementById('login-button')
-            .addEventListener('click', (function(event){
+            .addEventListener('click', (async function (event) {
                 {
-                    document.getElementById(email)
+                    const creds = {
+                        email: document.getElementById('email').value,
+                        password: document.getElementById('password').value
+                    };
+                    await admin.login(creds, admin.displayOrders);
+                }
+            }))
     }
-}
-admin = new Admin('admin-login')
+        
+    async displayOrders() {
+        // fetch the orders with the token
+        console.log('got here');
+        const orders = await this.services.getOrders(this.token);
+        console.log(orders);
+        // display results
+    }
 
+}
+const admin = new Admin('#admin-login');
+admin.showLogin();
