@@ -51,7 +51,7 @@ class Admin {
     async displayOrders() {
         // fetch the orders with the token
         console.log('got here');
-        const orders = await this.services.getOrders(this.token);
+        const orders = await admin.services.getOrders(admin.token);
         console.log(orders);
         // display results
     }
