@@ -658,3 +658,26 @@ table#order-summary td:last-child {
 .signUpBtn:active {
   transform: scale(.98);
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  overflow: hidden;
+}
+tr {
+  width: auto;
+}
+td, th{
+  border-top: 1px solid #ECF0F1;
+  padding: 10px;
+  font-size: 12px;
+}
+td{
+  border-left: 1px solid #ECF0F1;
+  border-right: 1px solid #ECF0F1;
+}
+th{
+  background-color: #000000;
+  color: #ECF0F1 ;
+}

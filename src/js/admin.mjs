@@ -50,12 +50,33 @@ class Admin {
         
     async displayOrders() {
         // fetch the orders with the token
-        console.log('got here');
         const orders = await admin.services.getOrders(admin.token);
-        console.log(orders);
         // display results
+        let innerHTML = `
+        <table>
+        <thead>
+          <tr>
+            <th>Last Name</th>
+            <th>Order Date</th>
+            <th>Order Total</th>
+          </tr>
+        </thead>
+        <tbody>
+        `;
+        orders.forEach(order => {
+            innerHTML += `
+            <tr>
+            <td>${order.lname}</td>
+            <td>${order.orderDate}</td>
+            <td>${order.orderTotal}</td>
+          </tr>`
+        });
+        innerHTML += `</tbody></table>`;
+        admin.mainElement.innerHTML = innerHTML;
     }
 
 }
 const admin = new Admin('#admin-login');
 admin.showLogin();
+
+
