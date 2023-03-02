@@ -263,10 +263,11 @@ button,
 #product-image {
   height: 345px;
   margin: 0 0 50px;
+  width: auto;
 }
 
 #product-image img {
-  width: 345px;
+  width: 60%;
   margin: auto;
 }
 

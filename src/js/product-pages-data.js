@@ -51,9 +51,9 @@ async function buildDetailsPage() {
     img.src = product.Images.PrimaryExtraLarge;
     img.alt = product.Name;
     imgCarCont.appendChild(img)
-    product.Colors.forEach(color => {
+    product.Images.ExtraImages.forEach(image => {
         imgTemplate += 
-        `<img src='${color.ColorPreviewImageSrc}' alt='${color.ColorName} ${product.Name}'>`
+        `<img src='${image.Src}' alt='${image.Title} ${product.Name}'>`
     }); 
     imgCarCont.innerHTML = imgTemplate
     document.getElementById('product-name-without-brand').textContent =
